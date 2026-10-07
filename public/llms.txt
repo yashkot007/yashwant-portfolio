@@ -1,8 +1,10 @@
 # Yashwant Kotipalli
 
-> I build GPU infrastructure at Oracle Cloud Infrastructure, with work spanning infrastructure health probes, multi-agent orchestration, and GPU kernel development and optimization. Previously, I owned distributed service modernization and production operations at Amazon ReCommerce.
+> I'm Yashwant Kotipalli. I build GPU infrastructure at Oracle Cloud Infrastructure, with work spanning infrastructure health probes, multi-agent orchestration, and GPU kernel development and optimization. Previously, I owned distributed service modernization and production operations at Amazon ReCommerce.
 
 Public profile last reviewed: 2026-10-07.
+
+Canonical website: https://yashwantkotipalli.com/
 
 The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance. Ongoing development and active study are identified separately from completed contributions.
 

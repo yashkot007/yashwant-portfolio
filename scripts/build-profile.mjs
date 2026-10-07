@@ -12,7 +12,9 @@ function publicUrl(value, label, schemes = ['https:']) {
   requiredString(value, label);
   if (!schemes.includes(new URL(value).protocol)) throw new Error('Unsupported URL in ' + label);
 }
-for (const key of ['name', 'summary', 'about', 'focus_context', 'meta_description']) requiredString(profile[key], key);
+for (const key of ['name', 'given_name', 'family_name', 'summary', 'about', 'focus_context', 'meta_description']) requiredString(profile[key], key);
+publicUrl(profile.site_url, 'site_url');
+if (new URL(profile.site_url).pathname !== '/' || new URL(profile.site_url).search || new URL(profile.site_url).hash) throw new Error('Expected a canonical site root URL');
 if (!/^\d{4}-\d{2}-\d{2}$/.test(profile.last_reviewed)) throw new Error('Expected last_reviewed as YYYY-MM-DD');
 for (const key of ['headline', 'experience', 'selected_work', 'skills', 'skill_groups', 'current_focus', 'focus_questions', 'public_work', 'education', 'sources']) {
   if (!Array.isArray(profile[key])) throw new Error('Expected ' + key + ' array');
@@ -53,6 +55,7 @@ const md = [
   '# ' + escape(profile.name), '',
   escape(profile.headline.join(' ')), '', escape(profile.summary), '',
   'Location: ' + escape(profile.location),
+  'Canonical website: ' + link(profile.name, profile.site_url),
   'Last reviewed: ' + profile.last_reviewed, '',
   'Public formats: ' + link('Human portfolio', representations.human) + ' · ' + link('JSON', representations.json) + ' · ' + link('Reading guide', representations.guidance), '',
   '## Current role', '',
@@ -95,6 +98,7 @@ md.push('');
 const llms = [
   '# ' + profile.name, '', '> ' + profile.summary, '',
   'Public profile last reviewed: ' + profile.last_reviewed + '.', '',
+  'Canonical website: ' + profile.site_url, '',
   'The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance. Ongoing development and active study are identified separately from completed contributions.', '',
   '## Profile', '',
   '- [Human portfolio](./): engineering work, public code and notes, experience and current focus.',

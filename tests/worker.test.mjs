@@ -9,10 +9,12 @@ const { default: worker } = await import(`data:text/javascript;base64,${Buffer.f
 const json = await readFile(new URL('../public/profile.json', import.meta.url), 'utf8');
 const markdown = await readFile(new URL('../public/profile.md', import.meta.url), 'utf8');
 const llms = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8');
+const publishedHtml = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const canonical = JSON.parse(await readFile(new URL('../data/public-profile.json', import.meta.url), 'utf8'));
 const html = '<!doctype html><title>Yashwant Kotipalli</title><h1>Human portfolio</h1>';
 
-function fixture() {
+function fixture(extraHeaders = {}) {
   const calls = [];
   const assets = new Map([
     ['/', [html, 'text/html']],
@@ -29,7 +31,7 @@ function fixture() {
       calls.push({ pathname: url.pathname, accept: request.headers.get('Accept'), method: request.method });
       const asset = assets.get(url.pathname);
       if (!asset) return new Response('Not found', { status: 404 });
-      return new Response(request.method === 'HEAD' ? null : asset[0], { headers: { 'Content-Type': asset[1], Vary: 'Accept-Encoding' } });
+      return new Response(request.method === 'HEAD' ? null : asset[0], { headers: { 'Content-Type': asset[1], Vary: 'Accept-Encoding', ...extraHeaders } });
     } } },
   };
 }
@@ -50,7 +52,7 @@ test('explicit formats map to root assets under any repository base path', async
       assert.equal(response.headers.get('Content-Type'), `${type}; charset=utf-8`);
       assert.equal(calls[0].pathname, `/profile.${suffix}`);
       assert.equal(calls[0].accept, null);
-      assert.match(response.headers.get('Link'), new RegExp(`${prefix}/profile\\.json`));
+      assert.ok(response.headers.get('Link').includes('<https://yashwantkotipalli.com/profile.json>; rel="alternate"; type="application/json"'));
       assert.equal(response.headers.get('Vary'), 'Accept-Encoding');
     }
   }
@@ -140,4 +142,79 @@ test('generated profiles preserve approved claims, project status and actual pub
   assert.deepEqual(profile.representations, { human: './', json: './profile.json', markdown: './profile.md', guidance: './llms.txt' });
   assert.match(markdown, /Completed contributions:/);
   assert.match(markdown, /Ongoing work:/);
+});
+
+test('public host aliases redirect once while preserving paths and query strings', async () => {
+  for (const url of [
+    'https://www.yashwantkotipalli.com/profile.json?source=contact',
+    'http://yashwantkotipalli.com/profile.json?source=contact',
+    'https://yashwant-kotipalli.yashwant7kotipalli.chatgpt.site/profile.json?source=contact',
+  ]) {
+    for (const method of ['GET', 'HEAD']) {
+      const { env, calls } = fixture();
+      const response = await worker.fetch(new Request(url, { method }), env);
+      assert.equal(response.status, 308);
+      assert.equal(response.headers.get('Location'), 'https://yashwantkotipalli.com/profile.json?source=contact');
+      assert.equal(calls.length, 0);
+      const target = await worker.fetch(new Request(response.headers.get('Location'), { method }), env);
+      assert.equal(target.status, 200);
+      assert.equal(target.headers.get('Location'), null);
+    }
+  }
+  const { env } = fixture();
+  const index = await worker.fetch(new Request('https://www.yashwantkotipalli.com/index.html?ref=linkedin'), env);
+  assert.equal(index.headers.get('Location'), 'https://yashwantkotipalli.com/?ref=linkedin');
+  const preview = await worker.fetch(new Request('http://localhost:8766/'), env);
+  assert.equal(preview.status, 200);
+  assert.equal(preview.headers.get('Location'), null);
+});
+
+test('canonical hints preserve caching and unrelated links, and all alternatives resolve', async () => {
+  for (const path of ['/', '/profile', '/profile.json', '/nested/site/profile.md']) {
+    const { env } = fixture({ Link: '</main.css>; rel="preload"; as="style", <https://old.example/>; rel="canonical"', ETag: '"fixture"', 'Cache-Control': 'public, max-age=60' });
+    const response = await worker.fetch(new Request('https://yashwantkotipalli.com' + path, { headers: { Accept: 'application/json' } }), env);
+    const links = response.headers.get('Link');
+    assert.ok(links.includes('</main.css>; rel="preload"; as="style"'));
+    assert.ok(links.includes('<https://yashwantkotipalli.com/>; rel="canonical"'));
+    assert.equal((links.match(/rel="canonical"/g) ?? []).length, 1);
+    assert.ok(!links.includes('old.example'));
+    assert.equal(response.headers.get('ETag'), '"fixture"');
+    assert.equal(response.headers.get('Cache-Control'), 'public, max-age=60');
+    for (const match of links.matchAll(/<([^>]+)>; rel="alternate"; type="([^"]+)"/g)) {
+      const alternate = await worker.fetch(new Request(match[1]), env);
+      assert.equal(alternate.status, 200);
+      assert.ok(alternate.headers.get('Content-Type').startsWith(match[2]));
+    }
+  }
+});
+
+test('search crawlers and browsers receive equal content and metadata', async () => {
+  for (const path of ['/', '/profile', '/profile.json']) {
+    const variants = [];
+    for (const agent of ['Mozilla/5.0', 'Googlebot', 'OAI-SearchBot', 'ChatGPT-User', 'GPTBot']) {
+      const { response } = await get(path, 'text/html', { headers: { 'User-Agent': agent } });
+      variants.push({ status: response.status, headers: [...response.headers], body: await response.text() });
+    }
+    for (const variant of variants) assert.deepEqual(variant, variants[0]);
+  }
+});
+
+test('published identity graph agrees with the visible profile and canonical sitemap', () => {
+  const schema = JSON.parse(publishedHtml.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+  const nodes = new Map(schema['@graph'].map(node => [node['@id'], node]));
+  const person = schema['@graph'].find(node => node['@type'] === 'Person');
+  const page = schema['@graph'].find(node => node['@type'] === 'ProfilePage');
+  const site = schema['@graph'].find(node => node['@type'] === 'WebSite');
+  assert.equal(nodes.size, 3);
+  assert.equal(nodes.get(page.mainEntity['@id']), person);
+  assert.equal(nodes.get(page.isPartOf['@id']), site);
+  assert.equal(person.name, canonical.name);
+  assert.equal(person.givenName + ' ' + person.familyName, canonical.name);
+  assert.equal(person.worksFor.name, canonical.current_role.organization);
+  assert.deepEqual(person.sameAs, [canonical.links.github, canonical.links.linkedin, canonical.links.x]);
+  for (const node of nodes.values()) assert.equal(node.url, canonical.site_url);
+  assert.ok(publishedHtml.includes('rel="canonical" href="' + canonical.site_url + '"'));
+  assert.ok(sitemap.includes('<loc>' + canonical.site_url + '</loc>'));
+  assert.ok(publishedHtml.includes(canonical.name));
+  assert.ok(!publishedHtml.includes('noindex'));
 });

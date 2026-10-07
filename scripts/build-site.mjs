@@ -5,10 +5,10 @@ import { createHash } from 'node:crypto';
 import './build-profile.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const siteOrigin = 'https://yashwantkotipalli.com';
 const publicDir = path.join(root, 'public');
 const styleVersion = createHash('sha256').update(await readFile(path.join(publicDir, 'assets/styles.css'))).digest('hex').slice(0, 12);
 const profile = JSON.parse(await readFile(path.join(root, 'data/public-profile.json'), 'utf8'));
+const siteOrigin = new URL(profile.site_url).origin;
 const h = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const links = items => items.map(item => '<a class="pd-link" href="' + h(item.url) + '">' + h(item.label) + '</a>').join('');
 const contactLabels = { github: 'GitHub', linkedin: 'LinkedIn', x: 'X', email: 'Email me' };
@@ -40,12 +40,27 @@ const experience = profile.experience.map(item => '<article class="pd-timeline">
 const skillGroups = profile.skill_groups.map(group => '<div><h3>' + h(group.label) + '</h3><p>' + h(group.items.join(' · ')) + '</p></div>').join('');
 const resume = '<p><strong>Experience</strong><br>' + profile.experience.map(item => h(item.display_name ?? item.organization) + ' · ' + h(item.title) + '<br>' + h(range(item))).join('<br><br>') + '</p><p><strong>Education</strong><br>' + profile.education.map(item => h(item.degree) + '<br>' + h(item.institution) + ' · ' + item.year).join('<br><br>') + '</p><p><strong>Skills</strong><br>' + h(profile.skills.join(' · ')) + '</p>';
 const person = {
-  '@context': 'https://schema.org', '@type': 'Person', '@id': siteOrigin + '/#person',
+  '@type': 'Person', '@id': siteOrigin + '/#person',
   name: profile.name, url: siteOrigin + '/', description: profile.summary,
+  givenName: profile.given_name, familyName: profile.family_name,
   jobTitle: profile.current_role.title,
   worksFor: { '@type': 'Organization', name: profile.current_role.organization },
+  homeLocation: { '@type': 'Place', name: profile.location },
   sameAs: [profile.links.github, profile.links.linkedin, profile.links.x],
   knowsAbout: profile.skills,
+};
+const structuredIdentity = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', '@id': siteOrigin + '/#website', url: profile.site_url,
+      name: profile.name, alternateName: new URL(profile.site_url).hostname,
+      publisher: { '@id': person['@id'] }, inLanguage: 'en' },
+    { '@type': 'ProfilePage', '@id': siteOrigin + '/#profile', url: profile.site_url,
+      name: profile.name + ' — AI Infrastructure Engineer', description: profile.meta_description,
+      mainEntity: { '@id': person['@id'] }, isPartOf: { '@id': siteOrigin + '/#website' },
+      inLanguage: 'en' },
+    person,
+  ],
 };
 const title = profile.name + ' — AI Infrastructure & Distributed Systems';
 const html = [
@@ -56,13 +71,18 @@ const html = [
   '  <meta name="viewport" content="width=device-width, initial-scale=1">',
   '  <title>' + h(title) + '</title>',
   '  <meta name="description" content="' + h(profile.meta_description) + '">',
+  '  <meta name="author" content="' + h(profile.name) + '">',
+  '  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">',
   '  <meta name="theme-color" content="#F5F3EA">',
   '  <meta property="og:type" content="website">',
   '  <meta property="og:title" content="' + h(title) + '">',
   '  <meta property="og:description" content="' + h(profile.meta_description) + '">',
+  '  <meta property="og:site_name" content="' + h(profile.name) + '">',
+  '  <meta property="og:locale" content="en_US">',
   '  <meta name="twitter:card" content="summary">',
   '  <meta name="twitter:title" content="' + h(title) + '">',
   '  <meta name="twitter:description" content="' + h(profile.meta_description) + '">',
+  '  <meta name="twitter:site" content="@' + h(new URL(profile.links.x).pathname.slice(1)) + '">',
   '  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">',
   '  <link rel="alternate" type="application/json" href="profile.json" title="Public career profile as JSON">',
   '  <link rel="alternate" type="text/markdown" href="profile.md" title="Public career profile as Markdown">',
@@ -70,8 +90,11 @@ const html = [
   '  <link rel="stylesheet" href="assets/styles.css?v=' + styleVersion + '">',
   '  <script src="assets/site.js" defer></script>',
   '  <link rel="canonical" href="' + siteOrigin + '/">',
+  '  <link rel="me" href="' + h(profile.links.linkedin) + '">',
+  '  <link rel="me" href="' + h(profile.links.github) + '">',
+  '  <link rel="me" href="' + h(profile.links.x) + '">',
   '  <meta property="og:url" content="' + siteOrigin + '/">',
-  '  <script type="application/ld+json">' + JSON.stringify(person).replace(/</g, '\\u003c') + '</script>',
+  '  <script type="application/ld+json">' + JSON.stringify(structuredIdentity).replace(/</g, '\\u003c') + '</script>',
   '</head>',
   '<body>',
   '<a class="skip-link" href="#field-home">Skip to content</a>',

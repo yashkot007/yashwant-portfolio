@@ -37,3 +37,15 @@ Company wordmarks are unchanged assets from official media resources:
 - [Deloitte](https://www.deloitte.com/no/no/legal/bilder-logo-media.html)
 
 Typography: DM Sans, IBM Plex Mono and Libre Baskerville via Google Fonts. The personal favicon is original.
+
+## Search identity
+
+The canonical website is `https://yashwantkotipalli.com/`. The public `www` and Sites origin aliases redirect to it, preserving paths and query strings. HTML, sitemap and HTTP canonical hints agree on that URL. Local previews and unknown hosts are not redirected.
+
+The homepage includes linked `WebSite`, `ProfilePage` and `Person` structured data. Professional identity and external profile references are generated from the public content model. Machine-readable profile aliases advertise absolute, resolvable alternatives and preserve upstream caching and preload metadata.
+
+The wildcard crawl rule allows search crawlers, including Googlebot and OAI-SearchBot. All visitors receive the same facts; only explicit content negotiation chooses a representation. `llms.txt` is an optional reading guide, not an indexing or ranking guarantee. GPTBot training permission is independent of ChatGPT Search permission; this SEO update does not change the existing training policy.
+
+After verifying the domain property `yashwantkotipalli.com` in Google Search Console, submit `https://yashwantkotipalli.com/sitemap.xml` and inspect the canonical homepage. Verification proves ownership; sitemap submission and indexing requests do not guarantee indexing or ranking. Track full-name and name-plus-role queries, then use original public engineering work and consistent LinkedIn/GitHub profile links to build a stronger identity over time.
+
+Primary references: [Google profile pages](https://developers.google.com/search/docs/appearance/structured-data/profile-page), [site names](https://developers.google.com/search/docs/appearance/site-names), [canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [OpenAI crawlers](https://developers.openai.com/api/docs/bots).

@@ -1,3 +1,8 @@
+const CANONICAL_ORIGIN = 'https://yashwantkotipalli.com';
+const PRODUCTION_HOSTS = new Set([
+  'yashwantkotipalli.com', 'www.yashwantkotipalli.com',
+  'yashwant-kotipalli.yashwant7kotipalli.chatgpt.site',
+]);
 const FORMATS = [
   { type: 'text/html', asset: '/' },
   { type: 'application/json', asset: '/profile.json' },
@@ -58,13 +63,22 @@ function addVary(headers, value) {
   headers.set('Vary', existing.join(', '));
 }
 
-function alternates(base) {
-  return `<${base}>; rel="alternate"; type="text/html", <${base}profile.json>; rel="alternate"; type="application/json", <${base}profile.md>; rel="alternate"; type="text/markdown"`;
+function profileLinks(existing = '', includeAlternates = true) {
+  // Keep preload and other upstream links, while replacing stale canonical hints.
+  const preserved = existing.split(/,\s*(?=<)/).filter(Boolean).filter(link => {
+    const rel = link.match(/;\s*rel\s*=\s*(?:"([^"]*)"|([^;\s,]+))/i);
+    return !(rel?.[1] ?? rel?.[2] ?? '').toLowerCase().split(/\s+/).includes('canonical');
+  });
+  const own = [`<${CANONICAL_ORIGIN}/>; rel="canonical"`];
+  if (includeAlternates) {
+    for (const format of FORMATS) own.push(`<${CANONICAL_ORIGIN}${format.asset}>; rel="alternate"; type="${format.type}"`);
+  }
+  return [...new Set([...preserved, ...own])].join(', ');
 }
 
 async function fetchProfile(request, env, route) {
   const negotiating = route.endpoint === 'profile';
-  const headers = new Headers({ Link: alternates(route.base) });
+  const headers = new Headers();
   if (negotiating) addVary(headers, 'Accept');
   if (!['GET', 'HEAD'].includes(request.method)) {
     headers.set('Allow', 'GET, HEAD');
@@ -85,7 +99,7 @@ async function fetchProfile(request, env, route) {
   assetRequest.headers.delete('Accept');
   const response = await env.ASSETS.fetch(assetRequest);
   const outputHeaders = new Headers(response.headers);
-  outputHeaders.set('Link', headers.get('Link'));
+  if (response.ok || response.status === 304) outputHeaders.set('Link', profileLinks(outputHeaders.get('Link') ?? ''));
   if (negotiating) addVary(outputHeaders, 'Accept');
   if (response.ok || response.status === 304) outputHeaders.set('Content-Type', `${format.type}; charset=utf-8`);
   return new Response(request.method === 'HEAD' ? null : response.body, {
@@ -97,13 +111,28 @@ async function fetchProfile(request, env, route) {
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+    // Consolidate the public host aliases; local previews and other hosts stay usable.
+    if (['GET', 'HEAD'].includes(request.method) && PRODUCTION_HOSTS.has(url.hostname)) {
+      const target = new URL(url);
+      target.protocol = 'https:';
+      target.host = new URL(CANONICAL_ORIGIN).host;
+      if (target.pathname === '/index.html') target.pathname = '/';
+      if (target.href !== url.href) return Response.redirect(target.href, 308);
+    }
     if (!env?.ASSETS?.fetch) {
       return new Response('Static asset binding unavailable\n', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     }
-    const route = profileRoute(new URL(request.url).pathname);
+    const route = profileRoute(url.pathname);
     if (route) return fetchProfile(request, env, route);
     // User agents are hints, never authentication or a reason to change content.
     // All ordinary requests retain the static site's routing and content.
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+    if (['/', '/index.html'].includes(url.pathname) && (response.ok || response.status === 304)) {
+      const headers = new Headers(response.headers);
+      headers.set('Link', profileLinks(headers.get('Link') ?? ''));
+      return new Response(request.method === 'HEAD' ? null : response.body, { status: response.status, statusText: response.statusText, headers });
+    }
+    return response;
   },
 };
