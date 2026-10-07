@@ -1,7 +1,8 @@
-Social brand SVG paths are from Bootstrap Icons:
+Social/contact SVG paths are from Bootstrap Icons:
 https://icons.getbootstrap.com/icons/linkedin/
 https://icons.getbootstrap.com/icons/github/
 https://icons.getbootstrap.com/icons/twitter-x/
+https://icons.getbootstrap.com/icons/envelope-fill/
 
 The MIT License (MIT)
 
