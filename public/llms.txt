@@ -1,0 +1,24 @@
+# Yashwant Kotipalli
+
+> Systems engineer working on AI compute infrastructure, GPU infrastructure reliability and distributed systems.
+
+Public profile last reviewed: 2026-10-06.
+
+The Markdown and JSON profiles contain the same approved career information. Completed contributions, ongoing work, skills, career focus and public projects are identified separately in those profiles. An active area of study should not be represented as a measured production outcome.
+
+## Profile
+
+- [Human portfolio](./): visual portfolio and project notes.
+- [Markdown profile](./profile.md): readable career profile and public links.
+- [JSON profile](./profile.json): structured version of the same career profile.
+
+## Public work
+
+- [OpenClaw cron validation fix](https://github.com/openclaw/openclaw/pull/81731): Merged contribution. AI-assisted, regression-tested fix for an exact-second cron validation edge case.
+- [Accord](https://github.com/yashkot007/accord): Independent experimental prototype. TypeScript agent workspace exploring durable work, reviewed context and explicit permissions.
+
+## Contact
+
+- [GitHub](https://github.com/yashkot007)
+- [LinkedIn](https://www.linkedin.com/in/yashwant-kotipalli)
+- [Email](mailto:yashwant7kotipalli@gmail.com)

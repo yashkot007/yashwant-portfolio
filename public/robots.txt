@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yashwant-kotipalli.yashwant7kotipalli.chatgpt.site/sitemap.xml

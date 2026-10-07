@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yashwant Kotipalli — AI Infrastructure &amp; Distributed Systems</title>
+  <meta name="description" content="Yashwant Kotipalli is a systems engineer at Oracle OCI, working on GPU infrastructure reliability, observability and orchestration. Selected work, experience and current focus in inference and GPU kernels.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F5F3EA">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yashwant Kotipalli — AI Infrastructure &amp; Distributed Systems">
+  <meta property="og:description" content="Engineering field notes on AI compute infrastructure, GPU reliability and distributed services.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate" type="application/json" href="profile.json" title="Public career profile as JSON">
+  <link rel="alternate" type="text/markdown" href="profile.md" title="Public career profile as Markdown">
+  <script>
+    (() => {
+      let theme = 'light';
+      try { if (localStorage.getItem('yk-portfolio-theme') === 'dark') theme = 'dark'; } catch {}
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#181A18' : '#F5F3EA';
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+  <!-- public-metadata-start -->
+  <link rel="canonical" href="https://yashwant-kotipalli.yashwant7kotipalli.chatgpt.site/">
+  <meta property="og:url" content="https://yashwant-kotipalli.yashwant7kotipalli.chatgpt.site/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Yashwant Kotipalli","url":"https://yashwant-kotipalli.yashwant7kotipalli.chatgpt.site/","jobTitle":"Senior Member of Technical Staff","worksFor":{"@type":"Organization","name":"Oracle Cloud Infrastructure"},"sameAs":["https://github.com/yashkot007","https://www.linkedin.com/in/yashwant-kotipalli"],"knowsAbout":["C++","Rust","Python","Java","GPU kernels","CUDA"]}</script>
+  <!-- public-metadata-end -->
+</head>
+<body>
+  <a class="skip-link" href="#field-home">Skip to content</a>
+<div id="portfolio" aria-label="Yashwant Kotipalli Field Notes portfolio">
+  <section class="pd-stage">
+    <div class="pd-page field">
+      <div class="pd-shell">
+        <header class="pd-wrap pd-nav"><a class="pd-name" href="#field-home"><span class="pd-monogram">YK</span><span>Yashwant Kotipalli</span></a><nav class="pd-links" aria-label="Main navigation"><a href="#field-work">Work</a><a class="pd-nav-optional" href="#field-experience">Experience</a><a class="pd-nav-optional" href="#field-focus">Focus</a><a data-open-resume href="#field-resume">Résumé</a></nav><button class="field-theme" type="button" aria-label="Dark mode" data-toggle-theme>
+  <span class="field-icon" aria-hidden="true" data-theme-icon>☾</span>
+  <span data-theme-label>Dark mode</span>
+</button>
+
+</header>
+        <main class="pd-wrap field-layout" id="field-home">
+          <aside class="field-index" aria-label="Page index"><p class="field-mark" aria-hidden="true">y.</p><p>ENGINEERING<br>FIELD NOTES</p><a href="#field-work">Selected work</a><a href="#field-experience">Experience</a><a href="#field-focus">Current focus</a><p style="margin-top:28px">AI compute<br>Distributed systems<br>Inference</p></aside>
+          <div>
+            <section class="field-hero" aria-labelledby="field-heading"><p class="pd-label pd-mono">Senior Member of Technical Staff · Oracle OCI</p><h1 id="field-heading">Systems engineer<br>building AI compute<br>infrastructure.</h1><div class="field-intro"><p>I build observability and orchestration systems for GPU infrastructure. My work spans AI compute reliability and distributed services, with an active focus on inference performance and GPU kernels.</p><div class="field-margin-note"><strong>The work beneath AI.</strong>Probing agents at Oracle OCI.<br>Service modernization at Amazon.<br>Systems judgment through operations.</div></div><div class="pd-actions"><a class="pd-link" href="#field-work">Read selected work</a><a class="pd-link" data-open-resume href="#field-resume">View résumé summary</a></div></section>
+            <section class="field-work" id="field-work" aria-labelledby="field-work-heading"><div class="pd-section-title"><h2 id="field-work-heading">Selected work</h2><span class="pd-mono">Technical case notes</span></div>
+              <article class="field-row"><span class="field-number" aria-hidden="true">01</span><div><span class="pd-mono pd-muted">Oracle OCI · GPU infrastructure</span><h3>Reliability below the application layer.</h3><p>Long-running probing agents that detect and surface low-level GPU infrastructure issues. Designed and deployed as part of AI compute infrastructure work.</p><details id="field-probing-case" name="field-case-notes"><summary class="pd-case-link"><span class="pd-closed-label">Read the case note</span><span class="pd-open-label">Close the case note</span><span class="field-icon" aria-hidden="true">+</span></summary><div class="pd-expand-content"><span class="pd-mono">Context &amp; contribution</span><h3>A clearer view of infrastructure health.</h3><div class="pd-note-grid"><div><span class="pd-mono">The setting</span><p>AI compute infrastructure at Oracle Cloud Infrastructure.</p></div><div><span class="pd-mono">What I owned</span><p>Design and deployment of long-running probing agents for low-level GPU infrastructure issues.</p></div><div><span class="pd-mono">The systems lens</span><p>Issue visibility, reliability and operational diagnosis beneath the application layer.</p></div><div><span class="pd-mono">Related work</span><p>Architected, shipped and managed a multi-agent orchestration harness for high-priority internal system transitions. Current work also includes developing a GPU-validation control plane.</p></div></div></div></details></div></article>
+              <article class="field-row"><span class="field-number" aria-hidden="true">02</span><div><span class="pd-mono pd-muted">Amazon · Distributed services</span><h3>Modernize the service. Own its operation.</h3><p>Core service redesign, migration to JDK 17 and a detailed migration process for service and data-access layers, alongside operational responsibility in ReCommerce.</p><details id="field-amazon-case" name="field-case-notes"><summary class="pd-case-link"><span class="pd-closed-label">Read the case note</span><span class="pd-open-label">Close the case note</span><span class="field-icon" aria-hidden="true">+</span></summary><div class="pd-expand-content"><span class="pd-mono">Change &amp; operational ownership</span><h3>Distributed systems as a continuous responsibility.</h3><div class="pd-note-grid"><div><span class="pd-mono">My role</span><p>Service ownership, systems-level redesign, migration planning and operational work.</p></div><div><span class="pd-mono">Implementation</span><p>JDK 17 service migrations and a detailed migration path across core service layers.</p></div><div><span class="pd-mono">Broader responsibilities</span><p>Production operations, peer review, and intern mentoring alongside service delivery.</p></div><div><span class="pd-mono">Transferable practice</span><p>Connecting technical changes, bottleneck work and responsibility for service operations.</p></div></div></div></details></div></article>
+            </section>
+            <section aria-labelledby="field-public-heading"><div class="pd-section-title"><h2 id="field-public-heading">Public engineering work</h2><span class="pd-mono">Inspectable artifacts</span></div><div class="pd-public-grid"><article class="pd-public-item"><span class="pd-mono pd-muted">OpenClaw · Merged contribution</span><h3>Preserving valid cron schedule slots.</h3><p>An AI-assisted, regression-tested fix for an exact-second cron validation edge case. Merged June 28, 2026.</p><a class="pd-link" href="https://github.com/openclaw/openclaw/pull/81731">Inspect merged pull request</a></article><article class="pd-public-item"><span class="pd-mono pd-muted">Accord · Independent prototype</span><h3>An agent workspace with explicit permissions.</h3><p>A TypeScript prototype exploring durable work, reviewed context and explicit permissions for personal agents.</p><a class="pd-link" href="https://github.com/yashkot007/accord">Inspect public code</a><p class="pd-public-note">Experimental prototype; public source with a private deployment.</p></article></div></section>
+            <section id="field-experience" aria-labelledby="field-experience-heading"><div class="pd-section-title"><h2 id="field-experience-heading">Experience</h2><span class="pd-mono">Professional history</span></div><div class="pd-timeline"><div class="field-employer"><span class="field-logo" data-company="oracle"><img alt="" src="assets/oracle-official.png" width="74" height="24"></span><h3>Oracle OCI</h3></div><p>Senior Member of Technical Staff</p><time>Aug 2025 — Present</time></div><div class="pd-timeline"><div class="field-employer"><span class="field-logo" data-company="amazon"><img alt="" src="assets/amazon-inverse-official.svg" width="74" height="24"></span><h3>Amazon</h3></div><p>Software Development Engineer</p><time>Jul 2022 — Aug 2025</time></div><div class="pd-timeline"><div class="field-employer"><span class="field-logo" data-company="deloitte"><img alt="" src="assets/deloitte-white.png" width="74" height="24"></span><h3>Deloitte US</h3></div><p>Machine Learning Engineer</p><time>Jul 2021 — Jun 2022</time></div></section>
+            <section class="field-focus" id="field-focus" aria-labelledby="field-focus-heading"><div><span class="pd-mono pd-muted">Current focus</span><h2 id="field-focus-heading">Inference, kernels<br>and systems depth.</h2></div><div><p>Focused study of inference performance, GPU kernels and distributed systems, building on professional AI compute infrastructure work.</p><div class="pd-study-links"><a href="https://fanout.sh/">fanout.sh</a><a href="https://www.intuitiveai.academy/">Intuitive AI Academy</a></div></div></section>
+            <div class="field-skills"><p class="pd-skills"><strong>Technical skills</strong><br>C++ · Rust · Python · Java · GPU kernels · CUDA</p></div>
+            <section class="pd-profile" style="margin-top:28px" aria-labelledby="field-about-heading"><div><h2 id="field-about-heading">About</h2><p>I’m based in Seattle and drawn to systems where performance, reliability and operational decisions have real consequences.</p></div><details class="pd-resume-summary" id="field-resume"><summary>View résumé summary <span class="field-icon" aria-hidden="true">+</span></summary><div class="pd-resume-content"><p><strong>Experience</strong><br>Oracle OCI · Aug 2025–present<br>Amazon · Jul 2022–Aug 2025<br>Deloitte US · Jul 2021–Jun 2022<br>Georgia Tech · AI Research Scholar (Computer Vision) · Jun–Nov 2019</p><p><strong>Education</strong><br>M.S. Information Systems · Northeastern University · 2022<br>B.Tech. Computer Science Engineering · Bennett University · 2020</p><p><strong>Skills</strong><br>C++ · Rust · Python · Java · GPU kernels · CUDA</p></div></details></section>
+          </div>
+        </main>
+        <footer class="pd-footer"><div class="pd-wrap pd-footer-inner"><div><h2>Good systems start with good questions.</h2><p class="pd-mono pd-muted">Yashwant Kotipalli</p></div><div class="pd-contact-links"><a class="pd-link" href="mailto:yashwant7kotipalli@gmail.com">Email me</a><a class="pd-link" href="https://github.com/yashkot007">GitHub</a><a class="pd-link" href="https://www.linkedin.com/in/yashwant-kotipalli">LinkedIn</a></div></div><div class="pd-wrap"><details class="field-tools" id="field-tools">
+  <summary>For tools &amp; agents <span class="field-icon" aria-hidden="true">+</span></summary>
+  <div class="field-agent-content">
+    <p>Public career profile: experience, technical contributions, skills, current focus, education and source links.</p>
+    <div class="pd-contact-links">
+      <a class="pd-link" href="profile.md" type="text/markdown">Profile as text</a>
+      <a class="pd-link" href="profile.json" type="application/json">Structured profile · JSON</a>
+      <a class="pd-link" href="llms.txt" type="text/plain">Reading guide</a>
+    </div>
+    <p class="field-agent-updated">Profile reviewed October 6, 2026.</p>
+  </div>
+</details>
+</div></footer>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+</body>
+</html>

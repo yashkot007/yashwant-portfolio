@@ -1,0 +1,77 @@
+{
+  "profile_version": "1.0",
+  "last_reviewed": "2026-10-06",
+  "name": "Yashwant Kotipalli",
+  "location": "Seattle",
+  "current_role": {
+    "title": "Senior Member of Technical Staff",
+    "organization": "Oracle Cloud Infrastructure",
+    "start": "2025-08"
+  },
+  "summary": "Systems engineer working on AI compute infrastructure, GPU infrastructure reliability and distributed systems.",
+  "experience": [
+    {
+      "organization": "Oracle Cloud Infrastructure",
+      "title": "Senior Member of Technical Staff",
+      "start": "2025-08",
+      "end": null,
+      "completed_contributions": [
+        "Designed and deployed long-running probing agents for low-level GPU infrastructure issues.",
+        "Architected, shipped and managed a multi-agent orchestration harness for high-priority internal system transitions."
+      ],
+      "ongoing_work": [
+        "Developing a GPU-validation control plane."
+      ]
+    },
+    {
+      "organization": "Amazon",
+      "title": "Software Development Engineer",
+      "start": "2022-07",
+      "end": "2025-08",
+      "contributions": [
+        "Core service redesign and JDK 17 migration work in ReCommerce.",
+        "Detailed migration planning for service and data-access layers.",
+        "Production operations, peer review and intern mentoring."
+      ]
+    },
+    {
+      "organization": "Deloitte US",
+      "title": "Machine Learning Engineer",
+      "start": "2021-07",
+      "end": "2022-06"
+    },
+    {
+      "organization": "Georgia Institute of Technology",
+      "title": "AI Research Scholar (Computer Vision)",
+      "start": "2019-06",
+      "end": "2019-11"
+    }
+  ],
+  "skills": ["C++", "Rust", "Python", "Java", "GPU kernels", "CUDA"],
+  "current_focus": ["AI infrastructure", "Inference performance", "GPU kernels", "Distributed systems"],
+  "focus_context": "Inference performance is an active area of study and career direction.",
+  "public_work": [
+    {
+      "name": "OpenClaw cron validation fix",
+      "status": "Merged contribution",
+      "merged": "2026-06-28",
+      "description": "AI-assisted, regression-tested fix for an exact-second cron validation edge case.",
+      "url": "https://github.com/openclaw/openclaw/pull/81731"
+    },
+    {
+      "name": "Accord",
+      "status": "Independent experimental prototype",
+      "description": "TypeScript agent workspace exploring durable work, reviewed context and explicit permissions.",
+      "url": "https://github.com/yashkot007/accord"
+    }
+  ],
+  "education": [
+    {"degree": "M.S. Information Systems", "institution": "Northeastern University", "year": 2022},
+    {"degree": "B.Tech. Computer Science Engineering", "institution": "Bennett University", "year": 2020}
+  ],
+  "links": {
+    "github": "https://github.com/yashkot007",
+    "linkedin": "https://www.linkedin.com/in/yashwant-kotipalli",
+    "email": "mailto:yashwant7kotipalli@gmail.com"
+  }
+}
