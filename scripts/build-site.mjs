@@ -4,7 +4,7 @@ import path from 'node:path';
 import './build-profile.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const siteOrigin = 'https://yashwant-kotipalli.yashwant7kotipalli.chatgpt.site';
+const siteOrigin = 'https://yashwantkotipalli.com';
 const publicDir = path.join(root, 'public');
 const profile = JSON.parse(await readFile(path.join(root, 'data/public-profile.json'), 'utf8'));
 const person = {
