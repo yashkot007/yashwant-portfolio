@@ -1,24 +1,29 @@
 # Yashwant Kotipalli
 
-> Systems engineer working on AI compute infrastructure, GPU infrastructure reliability and distributed systems.
+> I build GPU infrastructure at Oracle Cloud Infrastructure, with work spanning infrastructure health probes, multi-agent orchestration, and GPU kernel development and optimization. Previously, I owned distributed service modernization and production operations at Amazon ReCommerce.
 
-Public profile last reviewed: 2026-10-06.
+Public profile last reviewed: 2026-10-07.
 
-The Markdown and JSON profiles contain the same approved career information. Completed contributions, ongoing work, skills, career focus and public projects are identified separately in those profiles. An active area of study should not be represented as a measured production outcome.
+The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance. Ongoing development and active study are identified separately from completed contributions.
 
 ## Profile
 
-- [Human portfolio](./): visual portfolio and project notes.
-- [Markdown profile](./profile.md): readable career profile and public links.
-- [JSON profile](./profile.json): structured version of the same career profile.
+- [Human portfolio](./): engineering work, public code and notes, experience and current focus.
+- [Markdown profile](./profile.md): complete readable profile and technical notes.
+- [JSON profile](./profile.json): the same facts, statuses, notes and evidence references.
 
 ## Public work
 
-- [OpenClaw cron validation fix](https://github.com/openclaw/openclaw/pull/81731): Merged contribution. AI-assisted, regression-tested fix for an exact-second cron validation edge case.
-- [Accord](https://github.com/yashkot007/accord): Independent experimental prototype. TypeScript agent workspace exploring durable work, reviewed context and explicit permissions.
+- [A one-second boundary in cron validation.](https://github.com/openclaw/openclaw/pull/81731): Merged contribution. Corrected a validation edge case that could rebase a valid future cron slot. The merged patch adds regression coverage for exact-second schedules.
+- [Durable work, bounded authority.](https://github.com/yashkot007/accord): Independent experimental prototype. An independent TypeScript agent workspace exploring durable task history, versioned updates, reviewed context and scoped permissions.
+
+## Evidence interpretation
+
+Employment dates follow the owner-selected resume baseline. Resume and professional-profile statements are professional self-report. Linked code and tests were inspected for the notes; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed. GPU kernel development is professional scope; inference performance and deeper kernel engineering also remain active areas of study. No benchmark speedup or production inference-serving result is asserted.
 
 ## Contact
 
 - [GitHub](https://github.com/yashkot007)
 - [LinkedIn](https://www.linkedin.com/in/yashwant-kotipalli)
+- [X](https://x.com/Yshwntktpl)
 - [Email](mailto:yashwant7kotipalli@gmail.com)

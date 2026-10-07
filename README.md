@@ -26,7 +26,7 @@ python3 -m http.server 8766 --directory public
 
 The static preview serves the public page and named profile files. The negotiated `/profile` route runs in the included Cloudflare-compatible Worker, using the `ASSETS` binding configured in `wrangler.json`.
 
-Approved public facts live in `data/public-profile.json`; `scripts/build-profile.mjs` generates JSON, Markdown and the discovery guide. Keep the human page consistent when changing career content. `scripts/build-site.mjs` produces `dist/client` assets and `dist/server/index.js` for hosting.
+Approved public content lives in `data/public-profile.json`. The build generates the human page, JSON, Markdown and discovery guide from that same model, including work status, professional scope, technical notes and immutable public-code references. `scripts/build-site.mjs` produces `dist/client` assets and `dist/server/index.js` for hosting.
 
 ## Asset sources
 

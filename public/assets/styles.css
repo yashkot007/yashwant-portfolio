@@ -265,3 +265,48 @@ html[data-theme='dark'] #portfolio .field {
   #portfolio .pd-wrap { width: 100%; }
 }
 
+
+#portfolio .field-index-context { margin-top: 28px; }
+#portfolio .pd-expand-content > p + p { margin-top: 18px; }
+#portfolio .pd-expand-content .pd-contact-links { margin-top: 18px; gap: 12px 22px; }
+#portfolio .pd-expand-content .pd-note-grid { margin-top: 0; }
+#portfolio .pd-note-grid h4 { margin: 0; font-weight: 400; }
+#portfolio .pd-public-item .pd-actions { margin-top: 12px; }
+#portfolio .pd-public-item .pd-actions .pd-link { margin-top: 0; }
+#portfolio .pd-public-item .pd-case-link { margin-top: 12px; color: var(--p-accent); min-height: 44px; }
+#portfolio .pd-timeline { grid-template-columns: 1.05fr 1.5fr .8fr; align-items: start; }
+#portfolio .pd-timeline .field-role-title { color: var(--p-text); }
+#portfolio .pd-timeline .field-role-scope { font-size: .875rem; line-height: 1.7; margin-top: 8px; }
+#portfolio .field-dates { font: .75rem/1.6 'IBM Plex Mono', monospace; text-align: right; }
+#portfolio .pd-timeline .field-dates { font-size: .75rem; }
+#portfolio .field-dates time { font: inherit; }
+#portfolio .field-research-label { background: transparent; padding: 0; color: var(--p-muted); font: .75rem/1.5 'IBM Plex Mono', monospace; }
+#portfolio .field-skill-groups { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 24px; padding-bottom: 26px; }
+#portfolio .field-skill-groups h3 { font-size: 1rem; margin-bottom: 10px; }
+#portfolio .field-skill-groups p { color: var(--p-muted); font-size: 1rem; line-height: 1.8; }
+#portfolio .field-focus-questions { margin: 20px 0 0; display: grid; grid-template-columns: 110px 1fr; gap: 12px 16px; font-size: 1rem; line-height: 1.75; }
+#portfolio .field-focus-questions dt { color: var(--p-text); }
+#portfolio .field-focus-questions dd { margin: 0; color: var(--p-muted); }
+#portfolio .pd-study-links { gap: 10px 18px; align-items: baseline; margin-top: 22px; }
+#portfolio .pd-study-links > span { color: var(--p-muted); font-size: .875rem; }
+#portfolio .field-about { margin-top: 28px; }
+#portfolio .field-education { margin-top: 24px; }
+#portfolio .field-education h3 { font-size: 1rem; margin-bottom: 12px; }
+#portfolio .field-education p { font-size: .875rem; }
+#portfolio .field-education p + p { margin-top: 12px; }
+#portfolio .field-contact-context { max-width: 510px; margin-top: 12px; color: var(--p-muted); font-size: 1rem; line-height: 1.7; }
+#portfolio .field-theme, #portfolio .field-tools > summary { font-size: .875rem; }
+@container portfolio (max-width: 720px) {
+  #portfolio .pd-timeline, #portfolio .field-skill-groups { grid-template-columns: 1fr; }
+  #portfolio .pd-timeline > div:nth-child(2), #portfolio .pd-timeline > .field-dates { padding-left: 86px; }
+  #portfolio .field-dates, #portfolio .field-dates time { text-align: left; }
+  #portfolio .field-focus-questions { grid-template-columns: 90px 1fr; gap: 12px; }
+}
+@media print {
+  #portfolio .field, html[data-theme='dark'] #portfolio .field {
+    --p-bg: #fff; --p-panel: #fff; --p-text: #18231F; --p-muted: #5B665F;
+    --p-accent: #8A4B25; --p-line: #CBCFC3; --p-rule: #18231F; --p-paper: #EEEDE3;
+    color-scheme: light;
+  }
+  #portfolio .field-skill-groups { grid-template-columns: 1fr 1fr 1.5fr; }
+}

@@ -124,7 +124,7 @@ test('generated profiles preserve approved claims, project status and actual pub
   assert.equal(profile.current_role.organization, 'Oracle Cloud Infrastructure');
   assert.equal(profile.current_role.start, '2025-08');
   assert.deepEqual(profile.experience[0].ongoing_work, ['Developing a GPU-validation control plane.']);
-  assert.match(profile.focus_context, /active area of study/);
+  assert.match(profile.focus_context, /active areas? of study/);
   assert.equal(profile.public_work[1].status, 'Independent experimental prototype');
   for (const url of [
     'https://github.com/openclaw/openclaw/pull/81731',
