@@ -24,9 +24,11 @@ npm test
 python3 -m http.server 8766 --directory public
 ```
 
-The static preview serves the public page and named profile files. The negotiated `/profile` route runs in the included Cloudflare-compatible Worker, using the `ASSETS` binding configured in `wrangler.json`.
+The static preview serves the public page and named profile files. The negotiated `/profile` route runs in the included Cloudflare-compatible Worker. Local Wrangler development uses the `ASSETS` binding configured in `wrangler.json`; the deployed bundle supplies the same interface from embedded public files.
 
-Approved public content lives in `data/public-profile.json`. The build generates the human page, JSON, Markdown and discovery guide from that same model, including work status, professional scope, technical notes and immutable public-code references. `scripts/build-site.mjs` produces `dist/client` assets and `dist/server/index.js` for hosting.
+Approved public content lives in `data/public-profile.json`. The build generates the human page, JSON, Markdown and discovery guide from that same model, including work status, professional scope, technical notes and immutable public-code references. `scripts/build-site.mjs` embeds all public file bytes in `dist/server/index.js` and copies `.openai/hosting.json`; it emits no `dist/client` assets. This Worker-only layout makes public requests reach the routing code, including host redirects and HTTP profile metadata. Native Sites packaging does not carry the source Wrangler configuration, so a local `run_worker_first` setting alone cannot establish production routing.
+
+The embedded asset adapter preserves exact file bytes, MIME types, GET/HEAD behavior and conditional requests with deterministic SHA-256 ETags. Public files require cache revalidation, missing files return 404, and error responses are not cached. The build rejects symlinks and special files; runtime asset access uses an exact path manifest. `npm test` rebuilds first and checks both the source Worker and the actual packaged entrypoint.
 
 ## Asset sources
 
@@ -46,6 +48,6 @@ The homepage includes linked `WebSite`, `ProfilePage` and `Person` structured da
 
 The wildcard crawl rule allows search crawlers, including Googlebot and OAI-SearchBot. All visitors receive the same facts; only explicit content negotiation chooses a representation. `llms.txt` is an optional reading guide, not an indexing or ranking guarantee. GPTBot training permission is independent of ChatGPT Search permission; this SEO update does not change the existing training policy.
 
-After verifying the domain property `yashwantkotipalli.com` in Google Search Console, submit `https://yashwantkotipalli.com/sitemap.xml` and inspect the canonical homepage. Verification proves ownership; sitemap submission and indexing requests do not guarantee indexing or ranking. Track full-name and name-plus-role queries, then use original public engineering work and consistent LinkedIn/GitHub profile links to build a stronger identity over time.
+On October 7, 2026, the Google Search Console domain property `yashwantkotipalli.com` was verified through a public DNS TXT record. The sitemap `https://yashwantkotipalli.com/sitemap.xml` reports Success with one discovered page. The live homepage test reported that the URL is available to Google, the page can be indexed, and one Profile page item is valid. An indexing request was accepted; the homepage was not yet indexed at that check. Verification, sitemap submission and indexing requests do not guarantee indexing or ranking. Track full-name and name-plus-role queries, then use original public engineering work and consistent LinkedIn/GitHub profile links to build a stronger identity over time.
 
 Primary references: [Google profile pages](https://developers.google.com/search/docs/appearance/structured-data/profile-page), [site names](https://developers.google.com/search/docs/appearance/site-names), [canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [OpenAI crawlers](https://developers.openai.com/api/docs/bots).

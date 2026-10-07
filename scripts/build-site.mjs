@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import './build-profile.mjs';
+import { buildWorkerBundle, collectPublicAssets } from './package-worker.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(root, 'public');
@@ -123,8 +124,9 @@ await writeFile(path.join(publicDir, 'sitemap.xml'), '<?xml version="1.0" encodi
 const dist = path.join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(path.join(dist, 'server'), { recursive: true });
-await cp(publicDir, path.join(dist, 'client'), { recursive: true });
-await cp(path.join(root, 'worker.js'), path.join(dist, 'server/index.js'));
+const assets = await collectPublicAssets(publicDir);
+const workerSource = await readFile(path.join(root, 'worker.js'), 'utf8');
+await writeFile(path.join(dist, 'server/index.js'), buildWorkerBundle(workerSource, assets));
 await mkdir(path.join(dist, '.openai'), { recursive: true });
 await cp(path.join(root, '.openai/hosting.json'), path.join(dist, '.openai/hosting.json'));
-console.log('Built the portfolio and agent formats from one public content model');
+console.log('Built the portfolio and agent formats as a self-contained Worker');
