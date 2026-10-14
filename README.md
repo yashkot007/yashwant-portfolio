@@ -1,6 +1,6 @@
 # Yashwant Kotipalli — Field Notes
 
-[Yashwant Kotipalli’s portfolio](https://yashwantkotipalli.com/) for AI infrastructure, GPU systems and distributed systems engineering.
+[Yashwant Kotipalli’s portfolio](https://yashwantkotipalli.com/) for AI infrastructure, inference serving and GPU performance engineering. Current role: Core Infrastructure Engineer at Oracle Cloud Infrastructure.
 
 The site opens in light mode. Visitors can switch to dark mode; their explicit preference is remembered on their device. Native work notes and the résumé summary remain readable without JavaScript.
 
@@ -13,6 +13,14 @@ The site opens in light mode. Visitors can switch to dark mode; their explicit p
 - `/profile` — request HTML, JSON or Markdown using the HTTP `Accept` header.
 
 Agent access is public and read-only. Format selection uses an explicit request, without a mandatory visitor question or a claim that every agent can be identified. Ordinary page and asset requests keep their normal behavior.
+
+## Career positioning and evidence
+
+The October 14, 2026 refinement follows the latest owner-provided inference-engineering résumé for employment titles, dates and professional summaries. The story connects GPU fleet health, telemetry, repair orchestration and production-service ownership to the owner's current focus on inference serving and performance, targeting mid-level and senior engineering roles.
+
+The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Serving runtimes and mechanisms are résumé-listed skills; C++ and GPU kernels were additionally confirmed by the owner. No production inference deployment, kernel implementation or serving speedup is invented. Public OpenClaw and Accord notes retain their inspected revisions and testing provenance, and are not presented as inference benchmarks. The latest résumé is not published as a raw file; the site uses its professional content without copying the private telephone number.
+
+The outstanding career evidence item is a reproducible public inference-serving benchmark or GPU profiling project with code, declared workloads, correctness checks, and latency/throughput results. It is a future to-do, not a completed portfolio artifact.
 
 ## Develop
 

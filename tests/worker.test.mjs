@@ -125,8 +125,12 @@ test('generated profiles preserve approved claims, project status and actual pub
   assert.deepEqual(facts, canonical);
   assert.equal(profile.current_role.organization, 'Oracle Cloud Infrastructure');
   assert.equal(profile.current_role.start, '2025-08');
-  assert.deepEqual(profile.experience[0].ongoing_work, ['Developing a GPU-validation control plane.']);
-  assert.match(profile.focus_context, /active areas? of study/);
+  assert.equal(profile.current_role.title, 'Core Infrastructure Engineer');
+  assert.equal(profile.current_role.title, profile.experience[0].title);
+  assert.ok(profile.experience[0].operating_objectives.every(item => ['objective', 'target'].includes(item.type)));
+  assert.match(profile.focus_context, /next specialization/);
+  assert.match(profile.focus_evidence, /no serving speedup or production serving ownership is claimed/);
+  assert.equal(profile.experience[0].professional_scope, undefined);
   assert.equal(profile.public_work[1].status, 'Independent experimental prototype');
   for (const url of [
     'https://github.com/openclaw/openclaw/pull/81731',
@@ -140,8 +144,9 @@ test('generated profiles preserve approved claims, project status and actual pub
     assert.ok(llms.includes(url), `Reading guide missing ${url}`);
   }
   assert.deepEqual(profile.representations, { human: './', json: './profile.json', markdown: './profile.md', guidance: './llms.txt' });
-  assert.match(markdown, /Completed contributions:/);
-  assert.match(markdown, /Ongoing work:/);
+  assert.match(markdown, /Delivered work:/);
+  assert.match(markdown, /Developed systems:/);
+  assert.match(markdown, /Operating objectives:/);
 });
 
 test('public host aliases redirect once while preserving paths and query strings', async () => {
@@ -211,6 +216,7 @@ test('published identity graph agrees with the visible profile and canonical sit
   assert.equal(person.name, canonical.name);
   assert.equal(person.givenName + ' ' + person.familyName, canonical.name);
   assert.equal(person.worksFor.name, canonical.current_role.organization);
+  assert.equal(person.jobTitle, canonical.current_role.title);
   assert.deepEqual(person.sameAs, [canonical.links.github, canonical.links.linkedin, canonical.links.x]);
   for (const node of nodes.values()) assert.equal(node.url, canonical.site_url);
   assert.ok(publishedHtml.includes('rel="canonical" href="' + canonical.site_url + '"'));

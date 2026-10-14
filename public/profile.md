@@ -1,53 +1,168 @@
 # Yashwant Kotipalli
 
-AI infrastructure engineer.
+AI infrastructure. Inference performance.
 
-I'm Yashwant Kotipalli. I build GPU infrastructure at Oracle Cloud Infrastructure, with work spanning infrastructure health probes, multi-agent orchestration, and GPU kernel development and optimization. Previously, I owned distributed service modernization and production operations at Amazon ReCommerce.
+I build GPU fleet health, repair orchestration and production telemetry at Oracle Cloud Infrastructure. Previously, I owned distributed services at Amazon ReCommerce. My current focus is inference serving and performance: request scheduling, KV-cache behavior and latency–throughput trade-offs.
 
 Location: Seattle
 Canonical website: [Yashwant Kotipalli](https://yashwantkotipalli.com/)
-Last reviewed: 2026-10-07
+Last reviewed: 2026-10-14
 
 Public formats: [Human portfolio](./) · [JSON](./profile.json) · [Reading guide](./llms.txt)
 
 ## Current role
 
-Senior Member of Technical Staff at Oracle Cloud Infrastructure · 2025-08 — present
+Core Infrastructure Engineer at Oracle Cloud Infrastructure · 2025-08 — present
 
 ## Engineering work
 
-### GPU infrastructure health.
+### GPU fleet health and repair.
 
-Oracle OCI · Deployed
+Oracle OCI · Production services
 
-Designed and deployed long-running probing agents that detect and surface low-level GPU infrastructure issues.
+Engineered and maintained GPU fleet health and repair services for OCI’s AI compute platform.
 
-- Engineering focus: Infrastructure observability and operational diagnosis beneath the application layer.
-- Current related work: Developing a GPU-validation control plane; professional scope also includes GPU kernel development and optimization.
+- Operating objectives: 97.5% GPU availability SLO and a ≤24-hour P90 repair-time target.
+- Hardware scope: H100, H200 and B200 GPUs, and GB200/GB300 platforms.
+- On-call responsibility: Coordinated repair escalations and customer handoffs with data center operations and hardware teams.
+- Recovery work: Cabling, thermal screening, fan and cooling issues formed part of the operational repair scope.
 
-Evidence basis: Professional summary from the selected resume and LinkedIn profile.
+Evidence basis: Professional self-report in the latest inference-engineering résumé. The SLO and repair-time values are operating objectives, not measured outcomes.
 
-### Orchestration for infrastructure transitions.
+### Repair-case transition orchestration.
 
 Oracle OCI · Shipped
 
-Architected, shipped and managed a multi-agent orchestration harness for high-priority internal system transitions.
+Shipped a multi-agent orchestration harness for GPU repair-case transitions, supporting host recovery workflows.
 
-- Individual responsibility: Architecture, delivery and management of the harness.
-- Lifecycle: The transition harness is shipped; GPU-validation control-plane work is described as in development.
+- My contribution: Developed and shipped the repair-transition harness.
+- Workflow scope: GPU repair-case transitions and host recovery workflows.
 
-Evidence basis: Professional summary from the selected resume.
+Evidence basis: Professional self-report in the latest inference-engineering résumé; no quantified recovery improvement is asserted.
 
-### Service modernization with production ownership.
+### Compact telemetry. Detectable reporting gaps.
+
+Oracle OCI · Implemented
+
+Refactored GPU fleet telemetry collection to retain compact host/device records, limit memory overhead and detect interrupted SmartNIC reporting.
+
+- Data representation: Compact host and device records in the fleet telemetry collection path.
+- Resource constraint: Limit collection memory overhead while retaining the records needed for fleet monitoring.
+- Signal integrity: Missing-data alerts identify interrupted reporting from SmartNICs.
+
+Evidence basis: Professional self-report in the latest inference-engineering résumé; no measured memory reduction is asserted.
+
+### Distributed services with production ownership.
 
 Amazon ReCommerce · Delivered and operated
 
-Core service redesign and JDK 17 migrations, with a migration process for service and data-access layers across at least three core services.
+Owned 11 engineering projects in Amazon ReCommerce, spanning service delivery, systems redesign and production operations.
 
-- Operating responsibility: Production operations accompanied service delivery and migration work.
-- Engineering practice: Peer review and intern mentoring alongside responsibility for distributed services.
+- Delivery: Contributed to three new revenue channels alongside ownership of distributed services.
+- Operations: Approximately 450 operational tickets, including high-severity incidents; evolving LLM-assisted triage and diagnosis from 2024 through 2025.
+- Engineering standards: Approximately 450 peer code reviews.
+- Mentoring: Three interns guided through full project delivery and conversion to full-time roles.
 
-Evidence basis: Professional summary from the selected resume and LinkedIn profile.
+Evidence basis: Professional self-report in the latest inference-engineering résumé. Project and operational counts are reported scope, not independently audited metrics.
+
+## Current inference focus
+
+Inference serving and performance.
+
+I’m deepening my work on the serving path: request scheduling, KV-cache capacity and GPU execution across prefill and decode. This is my next specialization, grounded in production GPU infrastructure and distributed-service ownership.
+
+- Scheduling: Continuous batching, queueing and workload shape: prompt lengths, output lengths, request arrivals and concurrency.
+- Memory: KV-cache capacity, paged allocation and the trade-offs around prefill/decode disaggregation.
+- Measurement: Time to first token, inter-token latency, output-token throughput and p95/p99 latency under a declared workload and latency constraints.
+- Profiling: System traces, CPU/GPU overlap and bottleneck attribution; numerical and quality checks when evaluating FP8/INT8 or kernel-level changes.
+
+Technical references: [vLLM benchmarking](https://docs.vllm.ai/en/latest/cli/bench/serve/) · [NVIDIA GenAI-Perf](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/perf_benchmark/genai-perf-README.html) · [Fanout](https://fanout.sh/) · [Intuitive AI Academy](https://www.intuitiveai.academy/)
+
+## Experience
+
+### Oracle Cloud Infrastructure
+
+Core Infrastructure Engineer · 2025-08 — present
+
+GPU fleet health, repair orchestration, production telemetry and on-call recovery for OCI’s AI compute platform.
+
+Delivered work:
+
+- Engineered and maintained GPU fleet health and repair services supporting H100, H200 and B200 GPUs, and GB200/GB300 platforms.
+- Shipped a multi-agent orchestration harness for GPU repair-case transitions.
+- Refactored telemetry collection to retain compact host/device records, limit memory overhead and detect interrupted SmartNIC reporting.
+- Coordinated repair escalations and customer handoffs with data center operations and hardware teams during on-call.
+
+Developed systems:
+
+- Developed a Slack-integrated agent for GPU on-call and security queues, designed around tag-triggered triage workflows.
+
+Operating objectives:
+
+- GPU availability SLO: 97.5%
+- P90 repair-time target: ≤24 hours
+
+### Amazon
+
+Software Development Engineer · 2022-07 — 2025-08
+
+Distributed-service delivery, systems redesign and production operations in Amazon ReCommerce.
+
+Contributions:
+
+- Owned 11 engineering projects and contributed to three new revenue channels.
+- Handled approximately 450 operational tickets, including high-severity incidents, with LLM-assisted triage and diagnostic workflows evolving from 2024 through 2025.
+- Contributed approximately 450 peer code reviews and mentored three interns through full project delivery and conversion to full-time roles.
+
+### Deloitte US
+
+Machine Learning Engineer · 2021-07 — 2022-06
+
+End-to-end ML applications, an ICR backend, CI/CD and data-pipeline optimization for eligibility and benefits services.
+
+Contributions:
+
+- Delivered ML applications supporting Tennessee Department of Human Services workflows serving more than two million individuals across seven access channels.
+- Developed an ICR ML backend and CI/CD pipelines, and optimized data pipelines and database queries.
+
+### Georgia Institute of Technology
+
+AI Research Scholar (Computer Vision) · 2019-06 — 2019-11
+
+Visual odometry and SLAM benchmark analysis at the Intelligent Vision and Automation Lab.
+
+Contributions:
+
+- Analyzed benchmark behavior for visual odometry and SLAM algorithms.
+- Investigated autonomous navigation with Turtlebot in simulation and physical trials.
+
+## Technical practice
+
+Inference frameworks, performance methods and the infrastructure stack behind my current direction.
+
+### Inference stack
+
+PyTorch · vLLM · TensorRT-LLM
+
+### Inference mechanisms
+
+Continuous batching · KV-cache management · PagedAttention · FP8/INT8 quantization · Speculative decoding · Prefill/decode · Disaggregated inference
+
+### Performance & observability
+
+Model benchmarking · GPU profiling · Nsight Systems · GPU kernels · Prometheus · Grafana · OpenTelemetry
+
+### Cloud & infrastructure
+
+Kubernetes · OCI · AWS · Docker · Terraform · CI/CD
+
+### Languages & systems
+
+Python · Java · Rust · C++ · Linux · Distributed systems · Substrate/overlay networking
+
+### Fleet operations
+
+GPU fleet health · Diagnostic & repair orchestration · Workflow state management
 
 ## Public code and engineering notes
 
@@ -93,88 +208,9 @@ Experimental implementation with a private deployment. Authentication belongs to
 
 Evidence basis: Inspected public source, tests and project documentation. Inspected 2026-10-07.
 
-## Experience
-
-### Oracle Cloud Infrastructure
-
-Senior Member of Technical Staff · 2025-08 — present
-
-GPU infrastructure health, transition orchestration and kernel development and optimization for AI workloads.
-
-Completed contributions:
-
-- Designed and deployed long-running probing agents that detect and surface low-level GPU infrastructure issues.
-- Architected, shipped and managed a multi-agent orchestration harness for high-priority internal system transitions.
-
-Ongoing work:
-
-- Developing a GPU-validation control plane.
-
-Professional scope:
-
-- GPU kernel development and performance optimization for AI workloads.
-
-### Amazon
-
-Software Development Engineer · 2022-07 — 2025-08
-
-Distributed services, JDK 17 modernization and production operations in ReCommerce.
-
-Contributions:
-
-- Core service redesign and JDK 17 migrations in ReCommerce.
-- Migration planning for service and data-access layers across at least three core services.
-- Production operations, peer review and intern mentoring.
-
-### Deloitte US
-
-Machine Learning Engineer · 2021-07 — 2022-06
-
-Application engineering for Tennessee's eligibility and benefits services.
-
-Contributions:
-
-- Application delivery and integration across multiple access channels for Tennessee public-service systems.
-
-### Georgia Institute of Technology
-
-AI Research Scholar (Computer Vision) · 2019-06 — 2019-11
-
-Visual odometry and SLAM benchmark analysis at the Intelligent Vision and Automation Lab.
-
-Contributions:
-
-- Benchmark analysis for visual odometry and SLAM algorithms.
-
-## Technical practice
-
-### Languages
-
-C++ · Rust · Python · Java
-
-### GPU systems
-
-GPU kernels · CUDA
-
-### Systems practice
-
-Distributed systems · GPU infrastructure health · Infrastructure orchestration · Production operations
-
-## Current focus
-
-Inference performance and kernel engineering.
-
-Inference performance and deeper kernel engineering are active areas of study and career focus, building on professional GPU infrastructure work.
-
-- Inference: How do prompt length, output length and concurrency change time to first token, inter-token latency and completed-request throughput?
-- Kernels: How can profiler evidence guide memory, compute and launch optimizations without violating numerical correctness across supported shapes and dtypes?
-- Infrastructure: What evidence supports a GPU health diagnosis, and how should orchestration respond to stale signals or partial failure?
-
-Reading and study: [Fanout](https://fanout.sh/) · [Intuitive AI Academy](https://www.intuitiveai.academy/)
-
 ## Background
 
-I'm based in Seattle. My work has moved from computer-vision benchmarking at Georgia Tech to production services at Amazon and GPU infrastructure at Oracle. The common thread is making system behavior understandable and owning the work through operation.
+I’m based in Seattle. My work has moved from computer-vision benchmarking at Georgia Tech and ML applications at Deloitte to distributed services at Amazon and GPU infrastructure at Oracle. I’m carrying that production foundation into inference serving and performance engineering.
 
 ## Education
 
@@ -183,7 +219,7 @@ I'm based in Seattle. My work has moved from computer-vision benchmarking at Geo
 
 ## Contact
 
-For technical conversations about AI infrastructure, GPU systems and production engineering.
+Interested in mid-level and senior engineering roles in inference serving, GPU performance and AI infrastructure.
 
 - [GitHub](https://github.com/yashkot007)
 - [LinkedIn](https://www.linkedin.com/in/yashwant-kotipalli)
@@ -192,6 +228,12 @@ For technical conversations about AI infrastructure, GPU systems and production 
 
 ## Source basis
 
-- Owner-provided resume; selected timeline · professional\_self\_report
-- [LinkedIn professional profile](https://www.linkedin.com/in/yashwant-kotipalli) · professional\_self\_report
+- Owner-provided inference-engineering résumé, October 14, 2026 · professional\_self\_report
+- Owner-confirmed C++ and GPU-kernel skills · owner\_confirmation
 - Public implementation, regression and project documentation linked in each public work item · inspected\_public\_code
+
+## Evidence interpretation
+
+Inference tools and mechanisms are listed in the latest résumé. C++ and GPU kernels were additionally confirmed by the owner. This inventory does not establish production inference deployment, kernel implementations or measured serving results.
+
+Current technical focus and résumé-listed skills. No public inference-serving benchmark, profiling report or kernel implementation is available as of this review; no serving speedup or production serving ownership is claimed.

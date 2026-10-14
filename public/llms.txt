@@ -1,16 +1,16 @@
 # Yashwant Kotipalli
 
-> I'm Yashwant Kotipalli. I build GPU infrastructure at Oracle Cloud Infrastructure, with work spanning infrastructure health probes, multi-agent orchestration, and GPU kernel development and optimization. Previously, I owned distributed service modernization and production operations at Amazon ReCommerce.
+> I build GPU fleet health, repair orchestration and production telemetry at Oracle Cloud Infrastructure. Previously, I owned distributed services at Amazon ReCommerce. My current focus is inference serving and performance: request scheduling, KV-cache behavior and latency–throughput trade-offs.
 
-Public profile last reviewed: 2026-10-07.
+Public profile last reviewed: 2026-10-14.
 
 Canonical website: https://yashwantkotipalli.com/
 
-The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance. Ongoing development and active study are identified separately from completed contributions.
+The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary from the latest owner-provided résumé. Current inference focus and tools are distinct from delivered professional work. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance.
 
 ## Profile
 
-- [Human portfolio](./): engineering work, public code and notes, experience and current focus.
+- [Human portfolio](./): professional work, current inference focus, experience, technical practice, public code and notes.
 - [Markdown profile](./profile.md): complete readable profile and technical notes.
 - [JSON profile](./profile.json): the same facts, statuses, notes and evidence references.
 
@@ -21,7 +21,15 @@ The human page, Markdown and JSON are generated from the same public content mod
 
 ## Evidence interpretation
 
-Employment dates follow the owner-selected resume baseline. Resume and professional-profile statements are professional self-report. Linked code and tests were inspected for the notes; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed. GPU kernel development is professional scope; inference performance and deeper kernel engineering also remain active areas of study. No benchmark speedup or production inference-serving result is asserted.
+Employment titles, dates and refreshed professional summaries follow the owner-provided inference-engineering résumé reviewed on 2026-10-14. These are professional self-report. The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Linked code and tests were inspected for the notes at the stated revisions; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed.
+
+Inference tools and mechanisms are listed in the latest résumé. C++ and GPU kernels were additionally confirmed by the owner. This inventory does not establish production inference deployment, kernel implementations or measured serving results.
+
+Current technical focus and résumé-listed skills. No public inference-serving benchmark, profiling report or kernel implementation is available as of this review; no serving speedup or production serving ownership is claimed.
+
+## Role interests
+
+Interested in mid-level and senior engineering roles in inference serving, GPU performance and AI infrastructure.
 
 ## Contact
 

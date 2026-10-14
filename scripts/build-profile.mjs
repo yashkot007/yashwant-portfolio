@@ -12,11 +12,11 @@ function publicUrl(value, label, schemes = ['https:']) {
   requiredString(value, label);
   if (!schemes.includes(new URL(value).protocol)) throw new Error('Unsupported URL in ' + label);
 }
-for (const key of ['name', 'given_name', 'family_name', 'summary', 'about', 'focus_context', 'meta_description']) requiredString(profile[key], key);
+for (const key of ['name', 'given_name', 'family_name', 'summary', 'about', 'focus_context', 'focus_evidence', 'skills_context', 'skills_evidence', 'page_title', 'profile_title', 'positioning_heading', 'meta_description']) requiredString(profile[key], key);
 publicUrl(profile.site_url, 'site_url');
 if (new URL(profile.site_url).pathname !== '/' || new URL(profile.site_url).search || new URL(profile.site_url).hash) throw new Error('Expected a canonical site root URL');
 if (!/^\d{4}-\d{2}-\d{2}$/.test(profile.last_reviewed)) throw new Error('Expected last_reviewed as YYYY-MM-DD');
-for (const key of ['headline', 'experience', 'selected_work', 'skills', 'skill_groups', 'current_focus', 'focus_questions', 'public_work', 'education', 'sources']) {
+for (const key of ['headline', 'index_context', 'experience', 'selected_work', 'skills', 'skill_groups', 'current_focus', 'focus_areas', 'public_work', 'education', 'sources']) {
   if (!Array.isArray(profile[key])) throw new Error('Expected ' + key + ' array');
 }
 const sourceIds = new Set(profile.sources.map(item => item.id));
@@ -27,11 +27,18 @@ for (const [key, value] of Object.entries(profile.links)) publicUrl(value, 'link
 for (const item of [...profile.study_links, ...profile.sources.filter(item => item.url)]) publicUrl(item.url, item.label);
 for (const item of profile.experience) {
   if (!/^\d{4}-\d{2}$/.test(item.start) || (item.end && !/^\d{4}-\d{2}$/.test(item.end))) throw new Error('Expected month precision in experience');
+  requiredString(item.id, 'experience.id');
+  for (const objective of item.operating_objectives ?? []) {
+    requiredString(objective.label, 'objective.label');
+    requiredString(objective.value, 'objective.value');
+    if (!['objective', 'target'].includes(objective.type)) throw new Error('Operating objectives must not be presented as achieved results');
+  }
 }
+if (profile.current_role.title !== profile.experience[0].title || profile.current_role.start !== profile.experience[0].start || profile.current_role.organization !== profile.experience[0].organization) throw new Error('Current role must agree with experience');
 for (const work of [...profile.selected_work, ...profile.public_work]) {
   for (const key of ['id', 'kind', 'status', 'title', 'description', 'evidence_basis']) requiredString(work[key], key);
 }
-const ids = [...profile.selected_work, ...profile.public_work].map(work => work.id);
+const ids = [...profile.experience, ...profile.selected_work, ...profile.public_work].map(work => work.id);
 if (new Set(ids).size !== ids.length) throw new Error('Work IDs must be unique');
 for (const work of profile.public_work) {
   publicUrl(work.url, 'public_work.' + work.name);
@@ -67,6 +74,20 @@ for (const work of profile.selected_work) {
     escape(work.description), '', ...work.scope.map(item => '- ' + escape(item.label) + ': ' + escape(item.text)),
     '', 'Evidence basis: ' + escape(work.evidence_basis));
 }
+md.push('', '## Current inference focus', '', escape(profile.focus_title), '', escape(profile.focus_context), '',
+  ...profile.focus_areas.map(item => '- ' + escape(item.label) + ': ' + escape(item.text)), '',
+  'Technical references: ' + profile.study_links.map(item => link(item.label, item.url)).join(' · '));
+md.push('', '## Experience');
+for (const item of profile.experience) {
+  md.push('', '### ' + escape(item.organization), '', escape(item.title) + ' · ' + range(item), '', escape(item.scope));
+  for (const [key, label] of [['completed_contributions', 'Delivered work'], ['developed_systems', 'Developed systems'], ['contributions', 'Contributions']]) {
+    if (!item[key]?.length) continue;
+    md.push('', label + ':', '', ...item[key].map(value => '- ' + escape(value)));
+  }
+  if (item.operating_objectives?.length) md.push('', 'Operating objectives:', '', ...item.operating_objectives.map(value => '- ' + escape(value.label) + ': ' + escape(value.value)));
+}
+md.push('', '## Technical practice', '', escape(profile.skills_context));
+for (const group of profile.skill_groups) md.push('', '### ' + escape(group.label), '', group.items.map(escape).join(' · '));
 md.push('', '## Public code and engineering notes');
 for (const work of profile.public_work) {
   md.push('', '### ' + link(work.title, work.url), '',
@@ -77,37 +98,27 @@ for (const work of profile.public_work) {
     escape(work.method), '',
     'Evidence basis: ' + escape(work.evidence_basis) + ' Inspected ' + work.inspected + '.');
 }
-md.push('', '## Experience');
-for (const item of profile.experience) {
-  md.push('', '### ' + escape(item.organization), '', escape(item.title) + ' · ' + range(item), '', escape(item.scope));
-  for (const [key, label] of [['completed_contributions', 'Completed contributions'], ['ongoing_work', 'Ongoing work'], ['professional_scope', 'Professional scope'], ['contributions', 'Contributions']]) {
-    if (!item[key]?.length) continue;
-    md.push('', label + ':', '', ...item[key].map(value => '- ' + escape(value)));
-  }
-}
-md.push('', '## Technical practice');
-for (const group of profile.skill_groups) md.push('', '### ' + escape(group.label), '', group.items.map(escape).join(' · '));
-md.push('', '## Current focus', '', escape(profile.focus_title), '', escape(profile.focus_context), '',
-  ...profile.focus_questions.map(item => '- ' + escape(item.label) + ': ' + escape(item.text)), '',
-  'Reading and study: ' + profile.study_links.map(item => link(item.label, item.url)).join(' · '));
 md.push('', '## Background', '', escape(profile.about), '', '## Education', '',
   ...profile.education.map(item => '- ' + escape(item.degree) + ' · ' + escape(item.institution) + ' · ' + item.year),
   '', '## Contact', '', escape(profile.contact_context), '', ...contact, '', '## Source basis', '');
 for (const item of profile.sources) md.push('- ' + (item.url ? link(item.label, item.url) : escape(item.label)) + ' · ' + escape(item.kind));
+md.push('', '## Evidence interpretation', '', escape(profile.skills_evidence), '', escape(profile.focus_evidence));
 md.push('');
 const llms = [
   '# ' + profile.name, '', '> ' + profile.summary, '',
   'Public profile last reviewed: ' + profile.last_reviewed + '.', '',
   'Canonical website: ' + profile.site_url, '',
-  'The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance. Ongoing development and active study are identified separately from completed contributions.', '',
+  'The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary from the latest owner-provided résumé. Current inference focus and tools are distinct from delivered professional work. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance.', '',
   '## Profile', '',
-  '- [Human portfolio](./): engineering work, public code and notes, experience and current focus.',
+  '- [Human portfolio](./): professional work, current inference focus, experience, technical practice, public code and notes.',
   '- [Markdown profile](./profile.md): complete readable profile and technical notes.',
   '- [JSON profile](./profile.json): the same facts, statuses, notes and evidence references.', '',
   '## Public work', '',
   ...profile.public_work.map(work => '- ' + link(work.title, work.url) + ': ' + work.status + '. ' + work.description), '',
   '## Evidence interpretation', '',
-  'Employment dates follow the owner-selected resume baseline. Resume and professional-profile statements are professional self-report. Linked code and tests were inspected for the notes; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed. GPU kernel development is professional scope; inference performance and deeper kernel engineering also remain active areas of study. No benchmark speedup or production inference-serving result is asserted.', '',
+  'Employment titles, dates and refreshed professional summaries follow the owner-provided inference-engineering résumé reviewed on ' + profile.last_reviewed + '. These are professional self-report. The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Linked code and tests were inspected for the notes at the stated revisions; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed.', '',
+  profile.skills_evidence, '', profile.focus_evidence, '',
+  '## Role interests', '', profile.contact_context, '',
   '## Contact', '', ...contact, '',
 ];
 await mkdir(path.join(root, 'public'), { recursive: true });
