@@ -131,7 +131,7 @@ test('generated profiles preserve approved claims, project status and actual pub
   assert.match(profile.focus_context, /next specialization/);
   assert.match(profile.focus_evidence, /no serving speedup or production serving ownership is claimed/);
   assert.equal(profile.experience[0].professional_scope, undefined);
-  assert.equal(profile.public_work[1].status, 'Independent experimental prototype');
+  assert.equal(profile.public_work.find(work => work.name === 'Accord').status, 'Independent experimental prototype');
   for (const url of [
     'https://github.com/openclaw/openclaw/pull/81731',
     'https://github.com/yashkot007/accord',

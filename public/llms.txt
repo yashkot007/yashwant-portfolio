@@ -1,12 +1,12 @@
 # Yashwant Kotipalli
 
-> I build GPU fleet health, repair orchestration and production telemetry at Oracle Cloud Infrastructure. Previously, I owned distributed services at Amazon ReCommerce. My current focus is inference serving and performance: request scheduling, KV-cache behavior and latency–throughput trade-offs.
+> I build AI infrastructure for GPU fleets at Oracle Cloud Infrastructure. My work spans fleet health, diagnostic workflows, repair orchestration and communication across substrate and overlay networks. Previously, I owned distributed services at Amazon ReCommerce. My current focus is inference optimization and scaling: scheduling, KV-cache behavior and latency–throughput trade-offs.
 
-Public profile last reviewed: 2026-10-14.
+Public profile last reviewed: 2026-10-27.
 
 Canonical website: https://yashwantkotipalli.com/
 
-The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary from the latest owner-provided résumé. Current inference focus and tools are distinct from delivered professional work. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance.
+The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary from the latest owner-provided résumé and the current LinkedIn profile, with sources identified per entry. Current inference focus and tools are distinct from delivered professional work. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance.
 
 ## Profile
 
@@ -16,14 +16,15 @@ The human page, Markdown and JSON are generated from the same public content mod
 
 ## Public work
 
+- [Persistence, concurrency and stale frame state.](https://github.com/garrytan/gstack/pull/1391): Shipped in v1.30.0.0. Contributed three browser-runtime reliability fixes covering console-log persistence, concurrent state-file writes and stale iframe references. Credited in the release changelog.
 - [A one-second boundary in cron validation.](https://github.com/openclaw/openclaw/pull/81731): Merged contribution. Corrected a validation edge case that could rebase a valid future cron slot. The merged patch adds regression coverage for exact-second schedules.
 - [Durable work, bounded authority.](https://github.com/yashkot007/accord): Independent experimental prototype. An independent TypeScript agent workspace exploring durable task history, versioned updates, reviewed context and scoped permissions.
 
 ## Evidence interpretation
 
-Employment titles, dates and refreshed professional summaries follow the owner-provided inference-engineering résumé reviewed on 2026-10-14. These are professional self-report. The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Linked code and tests were inspected for the notes at the stated revisions; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed.
+Employment titles and dates follow the owner-provided inference-engineering résumé reviewed on 2026-10-14. Professional summaries also incorporate the current LinkedIn profile reviewed on 2026-10-27. These are professional self-report. The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Linked code and tests were inspected for the notes at the stated revisions; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed.
 
-Inference tools and mechanisms are listed in the latest résumé. C++ and GPU kernels were additionally confirmed by the owner. This inventory does not establish production inference deployment, kernel implementations or measured serving results.
+Inference tools and mechanisms are listed in the October 2026 résumé. C++ and GPU kernels were additionally confirmed by the owner; the current LinkedIn profile also identifies C++ and Rust in the hands-on stack and describes the diagnostic and networking responsibilities. This inventory does not establish production inference deployment, kernel implementations or measured serving results.
 
 Current technical focus and résumé-listed skills. No public inference-serving benchmark, profiling report or kernel implementation is available as of this review; no serving speedup or production serving ownership is claimed.
 

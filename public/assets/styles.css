@@ -315,6 +315,9 @@ html[data-theme='dark'] #portfolio .field {
   #portfolio .field-skill-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @container portfolio (max-width: 720px) {
+  #portfolio .pd-section-title { flex-wrap: wrap; gap: 10px; }
+  #portfolio .pd-section-title h2 { flex-basis: 100%; }
+  #portfolio .pd-section-title .pd-mono { max-width: none; text-align: left; }
   #portfolio .pd-timeline, #portfolio .field-skill-groups { grid-template-columns: 1fr; }
   #portfolio .pd-timeline > div:nth-child(2), #portfolio .pd-timeline > .field-dates { padding-left: 86px; }
   #portfolio .field-dates, #portfolio .field-dates time { text-align: left; }

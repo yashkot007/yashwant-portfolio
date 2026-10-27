@@ -12,7 +12,7 @@ function publicUrl(value, label, schemes = ['https:']) {
   requiredString(value, label);
   if (!schemes.includes(new URL(value).protocol)) throw new Error('Unsupported URL in ' + label);
 }
-for (const key of ['name', 'given_name', 'family_name', 'summary', 'about', 'focus_context', 'focus_evidence', 'skills_context', 'skills_evidence', 'page_title', 'profile_title', 'positioning_heading', 'meta_description']) requiredString(profile[key], key);
+for (const key of ['name', 'given_name', 'family_name', 'summary', 'about', 'work_heading', 'focus_context', 'focus_evidence', 'skills_context', 'skills_evidence', 'page_title', 'profile_title', 'positioning_heading', 'meta_description']) requiredString(profile[key], key);
 publicUrl(profile.site_url, 'site_url');
 if (new URL(profile.site_url).pathname !== '/' || new URL(profile.site_url).search || new URL(profile.site_url).hash) throw new Error('Expected a canonical site root URL');
 if (!/^\d{4}-\d{2}-\d{2}$/.test(profile.last_reviewed)) throw new Error('Expected last_reviewed as YYYY-MM-DD');
@@ -67,20 +67,20 @@ const md = [
   'Public formats: ' + link('Human portfolio', representations.human) + ' · ' + link('JSON', representations.json) + ' · ' + link('Reading guide', representations.guidance), '',
   '## Current role', '',
   escape(profile.current_role.title) + ' at ' + escape(profile.current_role.organization) + ' · ' + profile.current_role.start + ' — present', '',
-  '## Engineering work',
+  '## ' + escape(profile.work_heading),
 ];
 for (const work of profile.selected_work) {
   md.push('', '### ' + escape(work.title), '', escape(work.organization) + ' · ' + escape(work.status), '',
     escape(work.description), '', ...work.scope.map(item => '- ' + escape(item.label) + ': ' + escape(item.text)),
     '', 'Evidence basis: ' + escape(work.evidence_basis));
 }
-md.push('', '## Current inference focus', '', escape(profile.focus_title), '', escape(profile.focus_context), '',
+md.push('', '## ' + escape(profile.focus_title), '', 'Current technical focus', '', escape(profile.focus_context), '',
   ...profile.focus_areas.map(item => '- ' + escape(item.label) + ': ' + escape(item.text)), '',
   'Technical references: ' + profile.study_links.map(item => link(item.label, item.url)).join(' · '));
 md.push('', '## Experience');
 for (const item of profile.experience) {
   md.push('', '### ' + escape(item.organization), '', escape(item.title) + ' · ' + range(item), '', escape(item.scope));
-  for (const [key, label] of [['completed_contributions', 'Delivered work'], ['developed_systems', 'Developed systems'], ['contributions', 'Contributions']]) {
+  for (const [key, label] of [['current_responsibilities', 'Current responsibilities'], ['completed_contributions', 'Delivered work'], ['developed_systems', 'Developed systems'], ['ongoing_work', 'In development'], ['contributions', 'Contributions']]) {
     if (!item[key]?.length) continue;
     md.push('', label + ':', '', ...item[key].map(value => '- ' + escape(value)));
   }
@@ -108,7 +108,7 @@ const llms = [
   '# ' + profile.name, '', '> ' + profile.summary, '',
   'Public profile last reviewed: ' + profile.last_reviewed + '.', '',
   'Canonical website: ' + profile.site_url, '',
-  'The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary from the latest owner-provided résumé. Current inference focus and tools are distinct from delivered professional work. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance.', '',
+  'The human page, Markdown and JSON are generated from the same public content model. Employer work is a professional summary from the latest owner-provided résumé and the current LinkedIn profile, with sources identified per entry. Current inference focus and tools are distinct from delivered professional work. Public contribution and prototype notes identify their status, inspected revision, source references and testing provenance.', '',
   '## Profile', '',
   '- [Human portfolio](./): professional work, current inference focus, experience, technical practice, public code and notes.',
   '- [Markdown profile](./profile.md): complete readable profile and technical notes.',
@@ -116,7 +116,7 @@ const llms = [
   '## Public work', '',
   ...profile.public_work.map(work => '- ' + link(work.title, work.url) + ': ' + work.status + '. ' + work.description), '',
   '## Evidence interpretation', '',
-  'Employment titles, dates and refreshed professional summaries follow the owner-provided inference-engineering résumé reviewed on ' + profile.last_reviewed + '. These are professional self-report. The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Linked code and tests were inspected for the notes at the stated revisions; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed.', '',
+  'Employment titles and dates follow the owner-provided inference-engineering résumé reviewed on ' + profile.resume_reviewed + '. Professional summaries also incorporate the current LinkedIn profile reviewed on ' + profile.last_reviewed + '. These are professional self-report. The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operating objectives, not achieved measurements. Linked code and tests were inspected for the notes at the stated revisions; inspection does not mean those tests were rerun. Contributor-reported test runs are attributed.', '',
   profile.skills_evidence, '', profile.focus_evidence, '',
   '## Role interests', '', profile.contact_context, '',
   '## Contact', '', ...contact, '',

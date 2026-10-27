@@ -1,14 +1,13 @@
 {
-  "profile_version": "2.0",
-  "last_reviewed": "2026-10-14",
+  "profile_version": "2.1",
+  "last_reviewed": "2026-10-27",
   "name": "Yashwant Kotipalli",
   "given_name": "Yashwant",
   "family_name": "Kotipalli",
   "site_url": "https://yashwantkotipalli.com/",
   "location": "Seattle",
   "headline": [
-    "AI infrastructure.",
-    "Inference performance."
+    "AI Infrastructure"
   ],
   "current_role": {
     "title": "Core Infrastructure Engineer",
@@ -16,12 +15,12 @@
     "display_name": "Oracle OCI",
     "start": "2025-08"
   },
-  "summary": "I build GPU fleet health, repair orchestration and production telemetry at Oracle Cloud Infrastructure. Previously, I owned distributed services at Amazon ReCommerce. My current focus is inference serving and performance: request scheduling, KV-cache behavior and latency–throughput trade-offs.",
-  "meta_description": "Yashwant Kotipalli — AI infrastructure engineer at Oracle OCI, focused on inference serving, GPU performance, fleet reliability and distributed systems.",
+  "summary": "I build AI infrastructure for GPU fleets at Oracle Cloud Infrastructure. My work spans fleet health, diagnostic workflows, repair orchestration and communication across substrate and overlay networks. Previously, I owned distributed services at Amazon ReCommerce. My current focus is inference optimization and scaling: scheduling, KV-cache behavior and latency–throughput trade-offs.",
+  "meta_description": "Yashwant Kotipalli — AI infrastructure at Oracle OCI. GPU fleet management, diagnostics and performance, with a focus on inference optimization and scaling.",
   "positioning": [
-    "GPU fleet reliability.",
-    "Repair orchestration.",
-    "Inference serving & performance."
+    "GPU fleet management.",
+    "Diagnostics & reliability.",
+    "Inference optimization & scaling."
   ],
   "experience": [
     {
@@ -32,12 +31,13 @@
       "title": "Core Infrastructure Engineer",
       "start": "2025-08",
       "end": null,
-      "scope": "GPU fleet health, repair orchestration, production telemetry and on-call recovery for OCI’s AI compute platform.",
+      "scope": "GPU fleet health, fault diagnosis, repair orchestration and communication across substrate and overlay networks.",
       "completed_contributions": [
         "Engineered and maintained GPU fleet health and repair services supporting H100, H200 and B200 GPUs, and GB200/GB300 platforms.",
         "Shipped a multi-agent orchestration harness for GPU repair-case transitions.",
         "Refactored telemetry collection to retain compact host/device records, limit memory overhead and detect interrupted SmartNIC reporting.",
-        "Coordinated repair escalations and customer handoffs with data center operations and hardware teams during on-call."
+        "Coordinated repair escalations and customer handoffs with data center operations and hardware teams during on-call.",
+        "Designed and deployed long-running GPU infrastructure health probes."
       ],
       "developed_systems": [
         "Developed a Slack-integrated agent for GPU on-call and security queues, designed around tag-triggered triage workflows."
@@ -55,7 +55,15 @@
         }
       ],
       "source_ids": [
-        "resume-inference-2026-10-14"
+        "resume-inference-2026-10-14",
+        "linkedin-2026-10-27"
+      ],
+      "current_responsibilities": [
+        "Define GPU diagnostic recipes and fault classifications, and build workflows that use GPU-host attributes and repair history to surface potential infrastructure faults.",
+        "Develop and troubleshoot cross-platform communication across substrate and overlay networks, including workflows close to GPU hardware."
+      ],
+      "ongoing_work": [
+        "Developing a GPU-validation control plane and hardware digital twin to automate validation and hardware onboarding across GPU configurations."
       ]
     },
     {
@@ -69,11 +77,14 @@
       "contributions": [
         "Owned 11 engineering projects and contributed to three new revenue channels.",
         "Handled approximately 450 operational tickets, including high-severity incidents, with LLM-assisted triage and diagnostic workflows evolving from 2024 through 2025.",
-        "Contributed approximately 450 peer code reviews and mentored three interns through full project delivery and conversion to full-time roles."
+        "Contributed approximately 450 peer code reviews and mentored interns through full project delivery and conversion to full-time roles.",
+        "Delivered core-service modernization and JDK 17 migrations, including a migration process for service and data-access layers across at least three core services."
       ],
       "source_ids": [
-        "resume-inference-2026-10-14"
-      ]
+        "resume-inference-2026-10-14",
+        "linkedin-2026-10-27"
+      ],
+      "legacy_anchor": "field-amazon-case"
     },
     {
       "id": "field-role-deloitte",
@@ -115,7 +126,7 @@
       "organization": "Oracle OCI",
       "kind": "professional_work",
       "status": "Production services",
-      "description": "Engineered and maintained GPU fleet health and repair services for OCI’s AI compute platform.",
+      "description": "Engineered and maintained GPU fleet health and repair services, with diagnostic workflows that surface potential hardware and infrastructure faults.",
       "scope": [
         {
           "label": "Operating objectives",
@@ -130,13 +141,14 @@
           "text": "Coordinated repair escalations and customer handoffs with data center operations and hardware teams."
         },
         {
-          "label": "Recovery work",
-          "text": "Cabling, thermal screening, fan and cooling issues formed part of the operational repair scope."
+          "label": "Diagnostic workflows",
+          "text": "GPU diagnostic recipes, fault classifications and workflows using host attributes and repair history; long-running probes surface low-level infrastructure issues."
         }
       ],
-      "evidence_basis": "Professional self-report in the latest inference-engineering résumé. The SLO and repair-time values are operating objectives, not measured outcomes.",
+      "evidence_basis": "Professional summary from the October 2026 résumé and current LinkedIn profile. SLO and repair-time values are operating objectives, not measured outcomes.",
       "source_ids": [
-        "resume-inference-2026-10-14"
+        "resume-inference-2026-10-14",
+        "linkedin-2026-10-27"
       ]
     },
     {
@@ -154,11 +166,16 @@
         {
           "label": "Workflow scope",
           "text": "GPU repair-case transitions and host recovery workflows."
+        },
+        {
+          "label": "In development",
+          "text": "A GPU-validation control plane and hardware digital twin for validation workflows and hardware onboarding."
         }
       ],
-      "evidence_basis": "Professional self-report in the latest inference-engineering résumé; no quantified recovery improvement is asserted.",
+      "evidence_basis": "Professional summary from the October 2026 résumé and current LinkedIn profile. The repair-transition harness is shipped; the validation control plane and hardware digital twin remain in development.",
       "source_ids": [
-        "resume-inference-2026-10-14"
+        "resume-inference-2026-10-14",
+        "linkedin-2026-10-27"
       ]
     },
     {
@@ -183,36 +200,6 @@
         }
       ],
       "evidence_basis": "Professional self-report in the latest inference-engineering résumé; no measured memory reduction is asserted.",
-      "source_ids": [
-        "resume-inference-2026-10-14"
-      ]
-    },
-    {
-      "id": "field-amazon-case",
-      "title": "Distributed services with production ownership.",
-      "organization": "Amazon ReCommerce",
-      "kind": "professional_work",
-      "status": "Delivered and operated",
-      "description": "Owned 11 engineering projects in Amazon ReCommerce, spanning service delivery, systems redesign and production operations.",
-      "scope": [
-        {
-          "label": "Delivery",
-          "text": "Contributed to three new revenue channels alongside ownership of distributed services."
-        },
-        {
-          "label": "Operations",
-          "text": "Approximately 450 operational tickets, including high-severity incidents; evolving LLM-assisted triage and diagnosis from 2024 through 2025."
-        },
-        {
-          "label": "Engineering standards",
-          "text": "Approximately 450 peer code reviews."
-        },
-        {
-          "label": "Mentoring",
-          "text": "Three interns guided through full project delivery and conversion to full-time roles."
-        }
-      ],
-      "evidence_basis": "Professional self-report in the latest inference-engineering résumé. Project and operational counts are reported scope, not independently audited metrics.",
       "source_ids": [
         "resume-inference-2026-10-14"
       ]
@@ -251,7 +238,10 @@
     "Substrate/overlay networking",
     "GPU fleet health",
     "Diagnostic & repair orchestration",
-    "Workflow state management"
+    "Workflow state management",
+    "GPU fault diagnosis",
+    "Diagnostic recipes & fault classification",
+    "Infrastructure health probes"
   ],
   "skill_groups": [
     {
@@ -314,17 +304,19 @@
       "items": [
         "GPU fleet health",
         "Diagnostic & repair orchestration",
-        "Workflow state management"
+        "Workflow state management",
+        "GPU fault diagnosis",
+        "Diagnostic recipes & fault classification",
+        "Infrastructure health probes"
       ]
     }
   ],
   "current_focus": [
-    "Inference serving",
-    "GPU performance",
-    "GPU kernels",
-    "Distributed systems"
+    "AI Infrastructure",
+    "GPU Fleet Management and Performance",
+    "Inference Optimization and Scaling"
   ],
-  "focus_title": "Inference serving and performance.",
+  "focus_title": "Inference Optimization and Scaling",
   "focus_context": "I’m deepening my work on the serving path: request scheduling, KV-cache capacity and GPU execution across prefill and decode. This is my next specialization, grounded in production GPU infrastructure and distributed-service ownership.",
   "study_links": [
     {
@@ -345,6 +337,52 @@
     }
   ],
   "public_work": [
+    {
+      "id": "field-gstack-note",
+      "name": "gStack",
+      "title": "Persistence, concurrency and stale frame state.",
+      "kind": "upstream_contribution",
+      "status": "Shipped in v1.30.0.0",
+      "description": "Contributed three browser-runtime reliability fixes covering console-log persistence, concurrent state-file writes and stale iframe references. Credited in the release changelog.",
+      "url": "https://github.com/garrytan/gstack/pull/1391",
+      "link_label": "Inspect shipped release",
+      "note_title": "Three fixes at runtime state boundaries.",
+      "note": [
+        "Console flushing referenced a tracker that had never been declared. Initializing the missing cursor restores periodic console-log persistence; a source-level regression guard checks that referenced flush trackers have matching declarations.",
+        "State-file updates used atomic rename but shared one temporary filename. Per-process temporary paths with a random suffix prevent writers from colliding on that intermediate file. Final-state replacement retains last-writer-wins behavior.",
+        "Detached-iframe recovery cleared the active frame but retained its reference map. Clearing those references at the same boundary aligns recovery with main-frame navigation. Logic tests cover detached, attached and no-frame states, plus navigation symmetry."
+      ],
+      "method": "Original contribution PRs #1309, #1310 and #1311 were closed after the fixes shipped through release PR #1391. Their descriptions disclose AI-assisted development and contributor-reported reproduction and test runs. Release source and regression tests were inspected, not executed, for this review.",
+      "evidence_basis": "Original authored PRs, maintainer shipping confirmations, merged release PR, and inspected release implementation, regression tests and changelog.",
+      "inspected": "2026-10-27",
+      "commit": "00f966b3ec97b0deb7562bd92f51a86187032224",
+      "references": [
+        {
+          "label": "Release credit",
+          "url": "https://github.com/garrytan/gstack/blob/00f966b3ec97b0deb7562bd92f51a86187032224/CHANGELOG.md"
+        },
+        {
+          "label": "Persistence and state writes",
+          "url": "https://github.com/garrytan/gstack/blob/00f966b3ec97b0deb7562bd92f51a86187032224/browse/src/server.ts"
+        },
+        {
+          "label": "Frame-state cleanup",
+          "url": "https://github.com/garrytan/gstack/blob/00f966b3ec97b0deb7562bd92f51a86187032224/browse/src/tab-session.ts"
+        },
+        {
+          "label": "Flush-tracker regression",
+          "url": "https://github.com/garrytan/gstack/blob/00f966b3ec97b0deb7562bd92f51a86187032224/browse/test/server-flush-trackers.test.ts"
+        },
+        {
+          "label": "State-file regression",
+          "url": "https://github.com/garrytan/gstack/blob/00f966b3ec97b0deb7562bd92f51a86187032224/browse/test/server-tmp-state-path.test.ts"
+        },
+        {
+          "label": "Frame-detachment regressions",
+          "url": "https://github.com/garrytan/gstack/blob/00f966b3ec97b0deb7562bd92f51a86187032224/browse/test/tab-session-frame-detach.test.ts"
+        }
+      ]
+    },
     {
       "id": "field-openclaw-note",
       "name": "OpenClaw cron validation fix",
@@ -436,15 +474,21 @@
       "kind": "professional_self_report"
     },
     {
+      "id": "linkedin-2026-10-27",
+      "label": "LinkedIn professional profile, reviewed October 27, 2026",
+      "kind": "professional_self_report",
+      "url": "https://www.linkedin.com/in/yashwant-kotipalli",
+      "inspected": "2026-10-27"
+    },
+    {
       "id": "owner-confirmed-skills",
       "label": "Owner-confirmed C++ and GPU-kernel skills",
       "kind": "owner_confirmation"
     },
     {
       "id": "public-artifacts",
-      "label": "Public implementation, regression and project documentation linked in each public work item",
-      "kind": "inspected_public_code",
-      "inspected": "2026-10-07"
+      "label": "Public implementation, regression and project documentation linked in each public work item; inspection dates are recorded per item",
+      "kind": "inspected_public_code"
     }
   ],
   "links": {
@@ -453,12 +497,12 @@
     "x": "https://x.com/Yshwntktpl",
     "email": "mailto:yashwant7kotipalli@gmail.com"
   },
-  "page_title": "Inference Serving & AI Infrastructure",
-  "profile_title": "AI Infrastructure & Inference Performance",
+  "page_title": "AI Infrastructure, GPU Performance & Inference",
+  "profile_title": "AI Infrastructure & GPU Performance",
   "index_context": [
-    "Inference serving",
-    "GPU performance",
-    "Distributed systems"
+    "AI infrastructure",
+    "GPU fleet performance",
+    "Inference optimization"
   ],
   "positioning_heading": "From the fleet to the serving path.",
   "career_target": {
@@ -474,7 +518,7 @@
     "context": "Building on production GPU infrastructure and distributed-service ownership, with inference serving and performance as the current specialization."
   },
   "skills_context": "Inference frameworks, performance methods and the infrastructure stack behind my current direction.",
-  "skills_evidence": "Inference tools and mechanisms are listed in the latest résumé. C++ and GPU kernels were additionally confirmed by the owner. This inventory does not establish production inference deployment, kernel implementations or measured serving results.",
+  "skills_evidence": "Inference tools and mechanisms are listed in the October 2026 résumé. C++ and GPU kernels were additionally confirmed by the owner; the current LinkedIn profile also identifies C++ and Rust in the hands-on stack and describes the diagnostic and networking responsibilities. This inventory does not establish production inference deployment, kernel implementations or measured serving results.",
   "focus_areas": [
     {
       "label": "Scheduling",
@@ -493,5 +537,7 @@
       "text": "System traces, CPU/GPU overlap and bottleneck attribution; numerical and quality checks when evaluating FP8/INT8 or kernel-level changes."
     }
   ],
-  "focus_evidence": "Current technical focus and résumé-listed skills. No public inference-serving benchmark, profiling report or kernel implementation is available as of this review; no serving speedup or production serving ownership is claimed."
+  "focus_evidence": "Current technical focus and résumé-listed skills. No public inference-serving benchmark, profiling report or kernel implementation is available as of this review; no serving speedup or production serving ownership is claimed.",
+  "resume_reviewed": "2026-10-14",
+  "work_heading": "GPU Fleet Management and Performance"
 }

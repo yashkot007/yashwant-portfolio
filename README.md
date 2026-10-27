@@ -22,6 +22,10 @@ The 97.5% GPU availability SLO and ≤24-hour P90 repair-time target are operati
 
 The outstanding career evidence item is a reproducible public inference-serving benchmark or GPU profiling project with code, declared workloads, correctness checks, and latency/throughput results. It is a future to-do, not a completed portfolio artifact.
 
+The October 27, 2026 refresh uses the requested headings: AI Infrastructure; GPU Fleet Management and Performance; Inference Optimization and Scaling. The current LinkedIn review adds diagnostic recipes, fault classification, infrastructure health probes, substrate/overlay networking, and the GPU-validation control plane and hardware digital twin still in development. Dates and job titles remain aligned with the résumé. Amazon modernization and mentoring stay in Experience, outside the GPU fleet section.
+
+The LinkedIn Featured review also surfaced three gStack contributions shipped through release PR #1391. The original authored PRs #1309, #1310 and #1311 are individually closed and unmerged; maintainer confirmations and the release changelog establish shipment in v1.30.0.0. The public note links the inspected release implementation and regression files and does not call these inference or performance results.
+
 ## Develop
 
 Node.js 20 or newer is sufficient; the project has no runtime package dependencies.
